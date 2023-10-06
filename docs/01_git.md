@@ -43,7 +43,7 @@ git checkout
 - Загрузите открытый ключ на сервер. В github есть специальная страница (Settings -> SSH and GPG keys -> New SSH key)
 - Склонируйте репозиторий при помощи команды
     ```
-    git clone git@github.com:iesdubna2023/docs.git
+    git clone git@github.com:uni-dubna-2023-fall/code.git
     ```
 
 #### HTTPS
@@ -51,7 +51,7 @@ git checkout
 
 - Склонируйте репозиторий при помощи команды
     ```
-    git clone https://github.com/iesdubna2023/docs.git
+    git clone https://github.com/uni-dubna-2023-fall/code.git
     ```
 
 Обратите внимание, что ссылки на один и тот же репозиторий немного разные. Так git узнает, какой протокол необходимо использовать.
