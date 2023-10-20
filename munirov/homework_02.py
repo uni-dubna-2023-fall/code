@@ -36,38 +36,3 @@ def count(lst):
 
 def lensort(lst):
     return sorted(lst, key=len)
-
-
-arg = ["my", "name", "is", "Masha"]
-print(reverse(arg))  # ["Masha", "is", "name", "my"]
-
-arg = ["a", "ab", "abc"]
-print(avglen(arg))  # 2.0
-
-arg = ["her", "name", "is", "Masha", "Masha", "is", "a", "sister", "of", "Zhenya"]
-print(index(arg))
-# {
-#     "her": 0,
-#     "name": 1,
-#     "is": [2, 5],
-#     "Masha": [3, 4],
-#     "a": 6,
-#     "sister": 7,
-#     "of": 8,
-#     "Zhenya": 9,
-# }
-
-arg1 = ["my", "name", "is", "Masha"]
-arg2 = ["my", "name", "is", "Zhenya"]
-print(coincidence(arg1, arg2))  # ["my", "name", "is"]
-
-arg = ["aaa", "aaa", "bbb", "ccc", "bbb"]
-print(count(arg))
-# {
-#     "aaa": 2,
-#     "bbb": 2,
-#     "ccc": 1,
-# }
-
-arg = ["abcd", "a", "ab", "abc", "bazinga", "bar"]
-print(lensort(arg))  # ["a", "ab", "abc", "bar", "abcd", "bazinga"]
