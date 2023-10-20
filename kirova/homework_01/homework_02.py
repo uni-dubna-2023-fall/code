@@ -1,18 +1,15 @@
-#1
 def reverse(l):
     new_l = []
     for i in range(1, len(l) + 1):
         new_l.append(l[-i]) 
     return new_l
 
-#2
 def avglen(l):
     c=0
     for word in l:
         c=len(word)+c
     return c/len(l)
 
-#3
 def index(list):
     word_i={}
     n=len(list)
@@ -27,7 +24,6 @@ def index(list):
             word_i[word] = i
     return word_i
 
-#4
 def coincidence(list1,list2):
     newlist=[]
     for i in list1:
@@ -36,7 +32,6 @@ def coincidence(list1,list2):
                 newlist.append(i)
     return newlist
  
-#5
 def count(list):
     word_i={}
     for i in list:
@@ -46,7 +41,6 @@ def count(list):
             word_i[i] = 1
     return word_i
 
-#6
 def lensort(list):
     diction = {}
     max_len = 0
