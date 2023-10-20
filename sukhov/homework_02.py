@@ -31,23 +31,3 @@ def count(words):
 
 def lensort(words):
     return sorted(words, key=len)
-
-arg1 = ["my", "name", "is", "Masha"]
-arg2 = ["my", "name", "is", "Zhenya"]
-arg_count = ["aaa", "aaa", "bbb", "ccc", "bbb"]
-arg_index = ["her", "name", "is", "Masha", "Masha", "is", "a", "sister", "of", "Zhenya"]
-arg_lensort = ["abcd", "a", "ab", "abc", "bazinga", "bar"]
-
-result_reverse = reverse(arg1)
-result_avglen = avglen(arg2)
-result_index = index(arg_index)
-result_coincidence = coincidence(arg1, arg2)
-result_count = count(arg_count)
-result_lensort = lensort(arg_lensort)
-
-print(result_reverse)
-print(result_avglen)
-print(result_index)
-print(result_coincidence)
-print(result_count)
-print(result_lensort)
