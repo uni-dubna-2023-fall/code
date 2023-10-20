@@ -24,7 +24,7 @@ def index(array):
 
 
 def coincidence(array1, array2):
-    return list(set(array1).intersection(array2))
+    return list(set(array1).intersection(array2)
 
 
 def count(array):
@@ -48,4 +48,4 @@ def lensort(words):
         words[j + 1] = current_word
 
     return words
-    
+
