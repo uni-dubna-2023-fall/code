@@ -10,14 +10,18 @@ def avglen(list):
         s+=len(i)
     return s/len(list)
 
-def index(list):
-    dictionary = {}
-    for i in range(len(list)):
-        if list[i] not in dictionary:
-            dictionary[list[i]]=[i]
+def index(arg):
+    result = {}
+    for i, v in enumerate(arg):
+        if v not in result.keys():
+            result[v] = [i]
         else:
-            dictionary[list[i]].append(i)
-    return dictionary
+            result[v].append(i)
+    for i in result.keys():
+        if len(result[i]) == 1:
+            copy = result[i][0]
+            result[i] = copy
+    return result
 
 def coincidence(list1, list2):
     b=[]
