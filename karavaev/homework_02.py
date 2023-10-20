@@ -1,47 +1,50 @@
-# Функция для инвертирования списка
-def reverse(input_list):
-    return input_list[::-1]
+def reverse(array):
+    return array[::-1]
 
-# Функция для вычисления средней длины слов в списке
-def avglen(word_list):
-    if not word_list:
-        return 0.0
 
-    total_length = sum(len(word) for word in word_list)
-    average_length = total_length / len(word_list)
-    return average_length
+def avglen(array):
+    if array:
+        total_letters = sum(len(word) for word in array)
+        return total_letters / len(array)
+    else:
+        return 0
 
-# Функция для поиска порядковых номеров слов в списке
-def index(word_list):
-    word_dict = {}
-    for index, word in enumerate(word_list):
-        if word in word_dict:
-            if isinstance(word_dict[word], list):
-                word_dict[word].append(index)
+
+def index(array):
+    dictionary = {}
+    for index, value in enumerate(array):
+        if value not in dictionary:
+            dictionary[value] = index
+        else:
+            if isinstance(dictionary[value], list):
+                dictionary[value].append(index)
             else:
-                word_dict[word] = [word_dict[word], index]
-        else:
-            word_dict[word] = index
-    return word_dict
+                dictionary[value] = [dictionary[value], index]
+    return dictionary
 
-# Функция для нахождения совпадающих элементов в двух списках
-def coincidence(list1, list2):
-    set1 = set(list1)
-    set2 = set(list2)
-    common_elements = list(set1.intersection(set2))
-    return common_elements
 
-# Функция для подсчета количества повторений слов в списке
-def count(word_list):
-    word_count = {}
-    for word in word_list:
-        if word in word_count:
-            word_count[word] += 1
-        else:
-            word_count[word] = 1
-    return word_count
+def coincidence(array1, array2):
+    return list(set(array1).intersection(array2))
 
-# Функция для сортировки слов по длине
-def lensort(word_list):
-    return sorted(word_list, key=lambda x: (len(x), x))
 
+def count(array):
+    dictionary = {}
+    for word in array:
+        dictionary[word] = dictionary.get(word, 0) + 1
+    return dictionary
+
+
+def lensort(words):
+    n = len(words)
+
+    for i in range(1, n):
+        current_word = words[i]
+        j = i - 1
+
+        while j >= 0 and len(current_word) < len(words[j]):
+            words[j + 1] = words[j]
+            j -= 1
+
+        words[j + 1] = current_word
+
+    return words
