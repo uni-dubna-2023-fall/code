@@ -1,14 +1,14 @@
-def reverse(l):
+def reverse(list):
     new_l = []
-    for i in range(1, len(l) + 1):
-        new_l.append(l[-i]) 
+    for i in range(1, len(list) + 1):
+        new_l.append(list[-i]) 
     return new_l
 
-def avglen(l):
+def avglen(list):
     c=0
-    for word in l:
+    for word in list:
         c=len(word)+c
-    return c/len(l)
+    return c/len(list)
 
 def index(list):
     word_i={}
