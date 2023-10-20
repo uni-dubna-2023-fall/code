@@ -1,7 +1,7 @@
 def reverse(list):
     b = []
     for i in range(len(list)):
-        b.append(list - i - 1)
+        b.append(list[i - 1])
     return b
 
 
