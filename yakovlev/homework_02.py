@@ -17,7 +17,11 @@ def index(lst):
         if word in index_dict:
             index_dict[word].append(i)
         else:
+<<<<<<< HEAD
             index_dict[word] = [i]
+=======
+            index_dict[word] = i
+>>>>>>> 9c6dcf2 (yakovlev homework 02)
     return index_dict
 
 
