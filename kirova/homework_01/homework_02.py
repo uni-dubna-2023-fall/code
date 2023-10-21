@@ -57,7 +57,7 @@ def lensort(list1):
             diction[n] = [i]
         max_len = max(max_len, n)
     sort_list = []
-    for i in range(max_len+1):
+    for i in range(max_len + 1):
         if i in diction:
             sort_list.extend(diction[i])
     return sort_list
