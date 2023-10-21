@@ -1,4 +1,4 @@
-def reverse(arg):
+def reverse (arg):
     s = []
     i = len(arg)
     while i > 0:
@@ -6,7 +6,9 @@ def reverse(arg):
         s.append(time)
         i -= 1
     return(s)
-def avglen(arg):
+
+
+def avglen (arg):
     llist = len(arg)
     i = llist
     lword = 0
@@ -16,51 +18,42 @@ def avglen(arg):
         i -= 1
     return(lword / llist)
 
-# dop function
-def chekdict(dict, word):
+
+def chekdict (dict, word):
     flag = 0
-    for k in dict.keys():
+    for k in dict:
         if k == word:
             flag = 1
     return(flag)
-def cheklist(liist, element):
+
+
+def cheklist (liist, element):
     flag = 0
     for word in liist:
         if element == word:
             flag = 1
     return(flag)
-def procheklist(liist, element):
+
+
+def procheklist (liist, element):
     flag = 0
     for word in liist:
         if element == word:
             flag += 1
     return(flag)
 
-def smallest(llist, element):
-    for word in llist:
-        if len(element) > len(word):
-            return(0)
-    return(1)
-def findsmallest(llist):
-    i = 0
-    for word in llist:
-        k = smallest(llist, word)
-        if k == 1:
-            return(i)
-        i += 1
 
-
-def index(arg):
+def index (arg):
     dictionary = {}
     i = 0
     for word in arg:
-        find = chekdict(dictionary, word)
+        find = chekdict (dictionary, word)
         if find == 0:
             dictionary[word] = i
         else:
-            l = isinstance(dictionary[word], int)
-            if l == 0:
-                dictionary[word].add(i)
+            chek = isinstance (dictionary[word], int)
+            if chek == 0:
+                dictionary[word].add (i)
             else:  
                 k = set()
                 k = {dictionary[word]}
@@ -69,35 +62,41 @@ def index(arg):
         i += 1
     return[dictionary]
 
-def coincidence(arg1, arg2):
+
+def coincidence (arg1, arg2):
     sovpadenya = []
     for word in arg1:
-        find1 = cheklist(arg2, word)
-        find2 = cheklist(sovpadenya, word)
+        find1 = cheklist (arg2, word)
+        find2 = cheklist (sovpadenya, word)
         if find1 == 1:
             if len(sovpadenya) != 0:
                 if find2 == 0:
-                  sovpadenya.append(word)
+                    sovpadenya.append(word)
             else:
                 sovpadenya.append(word)
     return(sovpadenya)
 
-def count(arg):
+
+def count (arg):
     dictionary = {}
     for word in arg:
-        f = procheklist(arg, word)
-        z = chekdict(dictionary, word)
+        f = procheklist (arg, word)
+        z = chekdict (dictionary, word)
         if z == 0:
             dictionary[word] = f
     return dictionary
 
-def lensort(arg):
-    i = len(arg)
+
+def lensort (arg):
+    i = 1
+    len = len(arg)
     result = []
-    clone = arg
-    while i > 0:
-        num = findsmallest(clone)
-        result.append(clone[num])
-        clone.pop(num)
-        i -= 1
+    dictionary = {}
+    for word in arg:
+        dictionary[word] = len(word)
+    while len(result) != len:
+        for word in dictionary:
+            if dictionary[word] == i:
+                result.append(word)
+        i += 1
     return(result)
