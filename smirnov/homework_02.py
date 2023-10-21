@@ -101,4 +101,3 @@ def lensort(arg):
         clone.pop(num)
         i -= 1
     return(result)
-
