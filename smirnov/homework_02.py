@@ -55,9 +55,9 @@ def index(arg):
             if chek == 0:
                 dictionary[word].add(i)
             else:
-                k = set()
-                k = {dictionary[word]}
-                k.add(i)
+                k = [dictionary[word]]
+                print(type(k))
+                k.append(i)
                 dictionary[word] = k
         i += 1
     return dictionary
@@ -100,3 +100,7 @@ def lensort(arg):
                 result.append(word)
         i += 1
     return result
+
+arg = ["her", "name", "is", "Masha", "Masha", "is", "a", "sister", "of", "Zhenya"]
+d = index(arg)
+print(d)
