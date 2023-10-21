@@ -16,7 +16,7 @@ def avglen(arg):
         p = len(arg[i - 1])
         lword += p
         i -= 1
-    return lword / llist 
+    return lword / llist
 
 
 def chekdict(dict, word):
@@ -89,12 +89,12 @@ def count(arg):
 
 def lensort(arg):
     i = 1
-    len = len(arg)
+    llist = len(arg)
     result = []
     dictionary = {}
     for word in arg:
         dictionary[word] = len(word)
-    while len(result) != len:
+    while len(result) != llist:
         for word in dictionary:
             if dictionary[word] == i:
                 result.append(word)
