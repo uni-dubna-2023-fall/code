@@ -1,41 +1,53 @@
+def reverse(array):
+    result = []
+    for obj in array:
+        result.insert(0, obj)
+    return result
 
 
-def reverse(lst):
-    return lst[::-1]
+def avglen(array):
+    total_letters = 0
+    for word in array:
+        total_letters += len(word)
+    return total_letters / len(array)
 
 
-def avglen(lst):
-    if len(lst) == 0:
-        return 0
-    total_len = sum(len(word) for word in lst)
-    return total_len / len(lst)
-
-
-def index(lst):
-    index_dict = {}
-    for i, word in enumerate(lst):
-        if word in index_dict:
-            index_dict[word].append(i)
+def index(array):
+    dictionary = {}
+    for value, key in enumerate(array):
+        if key not in dictionary.keys():
+            dictionary[key] = [value]
         else:
-<<<<<<< HEAD
-            index_dict[word] = [i]
-=======
-            index_dict[word] = i
->>>>>>> 9c6dcf2 (yakovlev homework 02)
-    return index_dict
+            dictionary[key].append(value)
+    for key in dictionary.keys():
+        if len(dictionary[key]) == 1:
+            copy = dictionary[key][0]
+            dictionary[key] = copy
+    return dictionary
 
 
-def coincidence(lst1, lst2):
-    return list(set(lst1) & set(lst2))
+def coincidence(array1, array2):
+    result = []
+    for i in range(len(array1)):
+        for j in range(len(array2)):
+            if array1[i] == array2[j]:
+                result.append(array1[i])
+    return result
 
 
-def count(lst):
-    count_dict = {}
-    for word in lst:
-        count_dict[word] = count_dict.get(word, 0) + 1
-    return count_dict
+def count(array):
+    dictionary = {}
+    for word in array:
+        if word not in dictionary.keys():
+            dictionary[word] = 1
+        else:
+            dictionary[word] += 1
+    return dictionary
 
 
-def lensort(lst):
-    lst.sort(key=lambda x: len(x))
-    return lst
+def lensort(array):
+    for i in range(len(array) - 1):
+        for j in range(len(array) - i - 1):
+            if len(array[j]) > len(array[j + 1]):
+                array[j], array[j + 1] = array[j + 1], array[j]
+    return array
