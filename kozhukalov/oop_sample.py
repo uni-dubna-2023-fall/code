@@ -34,14 +34,9 @@ class Dog(Pet):
 
 
 fish = Pet()
-
 cat1 = Cat("vasya", 5, "main coon")
 cat2 = Cat("murka", 3, "unknown")
-
-
-
 dog = Dog("tuzik", 10)
-
 print(cat1.voice())
 print(fish.voice())
 print(dog.voice())
