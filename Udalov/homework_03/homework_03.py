@@ -51,7 +51,7 @@ class Circuit:
             edge_voltage = edge.e - edge.j * r
 
             if edge.tip is not None:
-                tip_idx = edge.tail.idx
+                tip_idx = edge.tip.idx
                 Z[tip_idx][tip_idx] += 1 / r
                 V[tip_idx] += edge_voltage / r
 
