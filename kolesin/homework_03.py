@@ -86,12 +86,6 @@ class Circuit:
             if self.edges[edge_idx].e is not None:
                 self.E[edge_idx, 0] = self.edges[edge_idx].e
 
-    def solve(self):
-        self._calculate_A()
-        self._calculate_Y()
-        self._calculate_J()
-        self._calculate_E()
-
     def calculate_matrix_equation(self):
          self.calculate_A()
          self.calculate_Y()
