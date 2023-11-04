@@ -3,16 +3,16 @@ import numpy as np
 
 class Node:
 
-    
     def __init__(self, idx):
         self.idx = idx
         self.phi = None
         self.edges = {}
-    
+
     def attach(self, edge, direction):
         self.edges[edge.idx] = [edge, direction]
 
 class Edge:
+
 
 
     def __init__(self, idx, r, e=None, j=None):
@@ -78,7 +78,7 @@ class Circuit:
                 self.J[node_idx, 0] = -self.nodes[node_idx].phi
     
     def _calculate_E(self):
-        
+
         num_edges = len(self.edges)
         self.E = np.zeros((num_edges, 1))
         for edge_idx in self.edges:
