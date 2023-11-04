@@ -35,9 +35,7 @@ class Edge:
 
 class Circuit:
 
-    
     def __init__(self):
-
         self.nodes = {}
         self.edges = {}
         self.A = None
