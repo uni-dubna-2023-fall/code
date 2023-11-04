@@ -5,10 +5,12 @@ class Node:
     def __init__(self, idx):
         self.idx = idx
         self.phi = None
-        self.edges = {}
 
-    def attach(self, edge, direction):
-        self.edges[edge.idx] = [edge, direction]
+    def get_phi(self):
+        return self.phi
+
+    def set_phi(self, phi):
+        self.phi = phi
 
 
 class Edge:
