@@ -46,7 +46,7 @@ class Circuit:
         V = np.zeros(num_nodes, dtype=float)
 
         for edge in self.b:
-            r = edge.resistance
+            r = edge.r
             edge_voltage = edge.voltage_source - edge.current_source * r
 
             if edge.tip is not None:
