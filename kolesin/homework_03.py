@@ -87,6 +87,7 @@ class Circuit:
                 self.E[edge_idx, 0] = self.edges[edge_idx].e
 
     def calculate_matrix_equation(self):
+
             self.calculate_A()
             self.calculate_Y()
             self.calculate_J()
