@@ -3,6 +3,7 @@ import numpy as np
 
 class Node:
 
+    
     def __init__(self, idx):
         self.idx = idx
         self.phi = None
@@ -11,11 +12,11 @@ class Node:
     def attach(self, edge, direction):
         self.edges[edge.idx] = [edge, direction]
 
-        def get_phi(self):
-            return self.phi
-
+    def get_phi(self):
+        return self.phi
 
 class Edge:
+
 
     def __init__(self, idx, r, e=None, j=None):
         self.idx = idx
@@ -27,75 +28,56 @@ class Edge:
         self.tail = None
 
     def attach_tip(self, node):
-
         self.tip = node
         node.attach(self, -1.0)
 
     def attach_tail(self, node):
-
         self.tail = node
         node.attach(self, 1.0)
 
 
 class Circuit:
 
+
     def __init__(self):
-        self.nodes = {}
-        self.edges = {}
-        self.A = None
-        self.Y = None
-        self.J = None
-        self.E = None
+        self.nodes = []
+        self.edges = []
 
     def add_node(self, node):
-        self.nodes[node.idx] = node
+        self.nodes.append(node)
 
     def add_edge(self, edge):
-        self.edges[edge.idx] = edge
+        self.edges.append(edge)
 
-    def _calculate_A(self):
+    def solve(self):
+        len_nodes = len(self.nodes)
 
-        num_nodes = len(self.nodes)
-        num_edges = len(self.edges)
-        self.A = np.zeros((num_nodes, num_edges))
-        for i, node_idx in enumerate(self.nodes):
-            for j, edge_idx in enumerate(self.edges):
-                if edge_idx in self.nodes[node_idx].edges:
-                    self.A[i, j] = self.nodes[node_idx].edges[edge_idx][1]
+        A = [[0.0] * len_nodes for _ in range(len_nodes)]
+        b = [0.0] * len_nodes
 
-    def _calculate_Y(self):
+        for edge in self.edges:
+            r = edge.r
+            edge_e = edge.e - edge.j * r
 
-        num_edges = len(self.edges)
-        self.Y = np.zeros((num_edges, num_edges))
-        for edge_idx in self.edges:
-            self.Y[edge_idx, edge_idx] = self.edges[edge_idx].y
+            if edge.tip is not None:
+                tip_idx = edge.tip.idx
+                A[tip_idx][tip_idx] += 1 / r
+                b[tip_idx] += edge_e / r
 
-    def _calculate_J(self):
+            if edge.tail is not None:
+                tail_idx = edge.tail.idx
+                A[tail_idx][tail_idx] += 1 / r
+                b[tail_idx] -= edge_e / r
 
-        num_nodes = len(self.nodes)
-        self.J = np.zeros((num_nodes, 1))
-        for node_idx in self.nodes:
-            if self.nodes[node_idx].phi is not None:
-                self.J[node_idx, 0] = -self.nodes[node_idx].phi
+            if edge.tip is not None and edge.tail is not None:
+                A[tip_idx][tail_idx] -= 1 / r
+                A[tail_idx][tip_idx] -= 1 / r
 
-    def _calculate_E(self):
+        det_A = np.linalg.det(A)
+        if det_A == 0:
+            raise Exception("Matrix A is singular, circuit cannot be solved.")
 
-        num_edges = len(self.edges)
-        self.E = np.zeros((num_edges, 1))
-        for edge_idx in self.edges:
-            if self.edges[edge_idx].e is not None:
-                self.E[edge_idx, 0] = self.edges[edge_idx].e
+        self.phi = np.linalg.solve(A, b)
 
-    def calculate_matrix_equation(self):
-
-            self.calculate_A()
-            self.calculate_Y()
-            self.calculate_J()
-            self.calculate_E()
-
-            AT = self.A.transpose()
-            matrix_eq_lhs = np.dot(np.dot(self.A, self.Y), AT)
-            matrix_eq_rhs = -np.dot(self.A, self.J + np.dot(self.Y, self.E))
-
-            x = np.linalg.solve(matrix_eq_lhs, matrix_eq_rhs)
-            return x
+        for i in range(len_nodes):
+            self.nodes[i].phi = self.phi[i]
