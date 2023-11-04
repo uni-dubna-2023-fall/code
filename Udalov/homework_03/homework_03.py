@@ -1,16 +1,14 @@
 import numpy as np
-
-
 class Node:
+    def __init__(self, idx):
+        self.idx = idx
+        self.phi = None
 
-    def __init__(self, x):
-        self.x = x
+    def get_phi(self):
+        return self.phi
 
-    def get_b(self, x2, y2, epsilon):
-        return self.b
-
-    def set_b(self, b):
-        self.b = b
+    def set_phi(self, phi):
+        self.phi = phi
 
 
 class Edge:
@@ -19,14 +17,14 @@ class Edge:
         self.r = r
         self.e = e
         self.j = j
-        self.node = None
-        self.node2 = None
+        self.tip = None
+        self.tail = None
 
     def attach_tip(self, node):
-        self.node = node
+        self.tip = node
 
     def attach_tail(self, node):
-        self.node2 = node
+        self.tail = node
 
 
 class Circuit:
@@ -50,19 +48,19 @@ class Circuit:
             r = edge.r
             edge_voltage = edge.e - edge.j * r
 
-            if edge.node is not None:
-                tip_idx = edge.node.idx
+            if edge.tip is not None:
+                tip_idx = edge.tail.idx
                 Z[tip_idx][tip_idx] += 1 / r
                 V[tip_idx] += edge_voltage / r
 
-            if edge.node2 is not None:
-                tail_idx = edge.node2.idx
+            if edge.tail is not None:
+                tail_idx = edge.tail.idx
                 Z[tail_idx][tail_idx] += 1 / r
                 V[tail_idx] -= edge_voltage / r
 
-            if edge.node is not None and edge.node2 is not None:
-                tail_idx = edge.node2.idx
-                tip_idx = edge.node.idx
+            if edge.tip is not None and edge.tail is not None:
+                tail_idx = edge.tail.idx
+                tip_idx = edge.tip.idx
                 Z[tip_idx][tail_idx] -= 1 / r
                 Z[tail_idx][tip_idx] -= 1 / r
 
