@@ -5,8 +5,10 @@ class Node:
         self.phi = None
         self.edges = {}
 
+    
     def attach(self, edge, direction):
         self.edges[edge.idx] = [edge, direction]
+
 
 class Edge:
     def __init__(self, idx, r, e=None, j=None):
@@ -18,10 +20,12 @@ class Edge:
         self.tip = None
         self.tail = None
 
+    
     def attach_tip(self, node):
         self.tip = node
         node.attach(self, -1.0)
 
+    
     def attach_tail(self, node):
         self.tail = node
         node.attach(self, 1.0)
@@ -37,12 +41,15 @@ class Circuit:
         self.J = None
         self.E = None
 
+    
     def add_node(self, node):
         self.nodes[node.idx] = node
 
+    
     def add_edge(self, edge):
         self.edges[edge.idx] = edge
 
+    
     def _calculate_A(self):
         self.A = []
         for node_idx in self.nodes:
@@ -54,6 +61,7 @@ class Circuit:
                     row.append(0.0)
             self.A.append(row)
 
+    
     def prepare(self):
         # calculate A
         self._calculate_A()
@@ -111,19 +119,11 @@ class Circuit:
                     sum_result += self.A[i][k] * AYE[k][j]
                 row.append(-sum_result)
             _AJYE.append(row)
-
         return _AJYE
 
+    
     def solve(self):
         AJYE = self.prepare()
-        AYE = []
-        for i in range(len(self.A)):
-            row = []
-            for j in range(len(self.J)):
-                sum_result = 0
-                sum_result += self.J[i][j] + self.E[i][j]
-                row.append(sum_result)
-            AYE.append(row)
         AYAE_T = np.add(AYA_T, AJYE)
         YAE_inv = np.linalg.inv(AYAE_T)
         YAJE = np.dot(YAE_inv, self.J)
