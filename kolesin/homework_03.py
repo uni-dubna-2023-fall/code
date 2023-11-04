@@ -90,4 +90,5 @@ class Circuit:
         self._calculate_A()
         self._calculate_Y()
         self._calculate_J()
-        self._calculate_E())
+        self._calculate_E()
+        
