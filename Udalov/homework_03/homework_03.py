@@ -50,17 +50,14 @@ class Circuit:
 
             if edge.tip is not None:
                 tip_idx = edge.tip.idx
-                Z[tip_idx, tip_idx] += 1 / r
+                Z[tip_idx][tip_idx] += 1 / r
                 V[tip_idx] += edge_voltage / r
 
             if edge.tail is not None:
                 tail_idx = edge.tail.idx
-                Z[tail_idx, tail_idx] += 1 / r
+                Z[tail_idx][tail_idx] += 1 / r
                 V[tail_idx] -= edge_voltage / r
 
-            if edge.tip is not None and edge.tail is not None:
-                Z[tip_idx, tail_idx] -= 1 / r
-                V[tail_idx, tip_idx] -= 1 / r
 
         self.phi = np.linalg.solve(Z, V)
 
