@@ -12,7 +12,7 @@ class Node:
         self.edges[edge.idx] = [edge, direction]
 
         def get_phi(self):
-         return self.phi
+            return self.phi
 
 
 class Edge:
@@ -91,4 +91,3 @@ class Circuit:
         self._calculate_Y()
         self._calculate_J()
         self._calculate_E()
-        
