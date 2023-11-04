@@ -87,14 +87,14 @@ class Circuit:
                 self.E[edge_idx, 0] = self.edges[edge_idx].e
 
     def calculate_matrix_equation(self):
-           self.calculate_A()
-           self.calculate_Y()
-           self.calculate_J()
-           self.calculate_E()
+            self.calculate_A()
+            self.calculate_Y()
+            self.calculate_J()
+            self.calculate_E()
 
-           AT = self.A.transpose()
-           matrix_eq_lhs = np.dot(np.dot(self.A, self.Y), AT)
-           matrix_eq_rhs = -np.dot(self.A, self.J + np.dot(self.Y, self.E))
+            AT = self.A.transpose()
+            matrix_eq_lhs = np.dot(np.dot(self.A, self.Y), AT)
+            matrix_eq_rhs = -np.dot(self.A, self.J + np.dot(self.Y, self.E))
 
-           x = np.linalg.solve(matrix_eq_lhs, matrix_eq_rhs)
-           return x
+            x = np.linalg.solve(matrix_eq_lhs, matrix_eq_rhs)
+            return x
