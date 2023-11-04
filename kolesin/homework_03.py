@@ -11,12 +11,11 @@ class Node:
     def attach(self, edge, direction):
         self.edges[edge.idx] = [edge, direction]
 
+
 class Edge:
 
 
-
     def __init__(self, idx, r, e=None, j=None):
-
         self.idx = idx
         self.r = r
         self.e = e
