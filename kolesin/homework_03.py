@@ -2,7 +2,6 @@ import numpy as np
 
 class Node:
     
-    
     def __init__(self, idx):
         self.idx = idx
         self.phi = None
@@ -12,7 +11,6 @@ class Node:
         self.edges[edge.idx] = [edge, direction]
 
 class Edge:
-
 
     def __init__(self, idx, r, e=None, j=None):
         self.idx = idx
@@ -32,7 +30,6 @@ class Edge:
         node.attach(self, 1.0)
 
 class Circuit:
-
     
     def __init__(self):
         self.nodes = {}
