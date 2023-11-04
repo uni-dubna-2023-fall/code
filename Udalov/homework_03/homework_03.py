@@ -47,7 +47,7 @@ class Circuit:
 
         for edge in self.b:
             r = edge.r
-            edge_voltage = edge.voltage_source - edge.current_source * r
+            edge_voltage = edge.e - edge.j * r
 
             if edge.tip is not None:
                 tip_idx = edge.tip.idx
