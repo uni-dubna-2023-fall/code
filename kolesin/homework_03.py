@@ -3,7 +3,7 @@ import numpy as np
 
 class Node:
 
-    
+
     def __init__(self, idx):
         self.idx = idx
         self.phi = None
@@ -15,8 +15,8 @@ class Node:
     def get_phi(self):
         return self.phi
 
-class Edge:
 
+class Edge:
 
     def __init__(self, idx, r, e=None, j=None):
         self.idx = idx
@@ -37,7 +37,6 @@ class Edge:
 
 
 class Circuit:
-
 
     def __init__(self):
         self.nodes = []
