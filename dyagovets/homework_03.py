@@ -1,4 +1,3 @@
-import numpy as np
 
 
 class Node:
@@ -43,8 +42,8 @@ class Circuit:
     def solve(self):
         len_nodes = len(self.nodes)
 
-        A = np.zeros((len_nodes, len_nodes))
-        b = np.zeros(len_nodes)
+        A = [[0.0] * len_nodes for _ in range(len_nodes)]
+        b = [0.0] * len_nodes
 
         for edge in self.edges:
             r = edge.r
@@ -64,8 +63,26 @@ class Circuit:
                 A[tip_idx][tail_idx] -= 1 / r
                 A[tail_idx][tip_idx] -= 1 / r
 
-        self.phi = np.linalg.solve(A, b)
+        def gauss_elimination(n, m, A, b):
+            for i in range(n - 1):
+                for j in range(i + 1, n):
+                    factor = A[j][i] / A[i][i]
+                    for k in range(i, m):
+                        A[j][k] -= factor * A[i][k]
+                    b[j] -= factor * b[i]
+            return A, b
+
+        def back_substitution(n, A, b):
+            x = [0.0] * n
+            for i in range(n - 1, -1, -1):
+                x[i] = b[i]
+                for j in range(i + 1, n):
+                    x[i] -= A[i][j] * x[j]
+                x[i] /= A[i][i]
+            return x
+
+        A, b = gauss_elimination(len_nodes, len_nodes, A, b)
+        self.phi = back_substitution(len_nodes, A, b)
 
         for i in range(len_nodes):
             self.nodes[i].set_phi(self.phi[i])
-            
