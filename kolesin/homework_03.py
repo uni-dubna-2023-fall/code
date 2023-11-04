@@ -70,3 +70,4 @@ class Circuit:
         for edge_idx in self.edges:
             if self.edges[edge_idx].e is not None:
                 self.E[edge_idx, 0] = self.edges[edge_idx].e
+                
