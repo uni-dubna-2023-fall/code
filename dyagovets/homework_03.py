@@ -68,4 +68,3 @@ class Circuit:
 
         for i in range(len_nodes):
             self.nodes[i].set_phi(self.phi[i])
-            
