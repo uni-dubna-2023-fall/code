@@ -8,7 +8,6 @@ class Node:
     def attach(self, edge, direction):
         self.edges[edge.idx] = [edge, direction]
 
-
 class Edge:
     def __init__(self, idx, r, e=None, j=None):
         self.idx = idx
@@ -117,7 +116,14 @@ class Circuit:
 
     def solve(self):
         AJYE = self.prepare()
-
+        AYE = []
+        for i in range(len(self.A)):
+            row = []
+            for j in range(len(self.J)):
+                sum_result = 0
+                sum_result += self.J[i][j] + self.E[i][j]
+                row.append(sum_result)
+            AYE.append(row)
         AYAE_T = np.add(AYA_T, AJYE)
         YAE_inv = np.linalg.inv(AYAE_T)
         YAJE = np.dot(YAE_inv, self.J)
