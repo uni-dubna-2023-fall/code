@@ -73,8 +73,9 @@ class Circuit:
         self.J = np.zeros((num_nodes, 1))
         for node_idx in self.nodes:
             if self.nodes[node_idx].phi is not None:
-                self.J[node_idx, 0] = -self.nodes[node_idx].phi 
-                                    
+                self.J[node_idx, 0] = -self.nodes[node_idx].phi
+                 
+
     def _calculate_E(self):
 
         num_edges = len(self.edges)
