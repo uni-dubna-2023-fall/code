@@ -89,4 +89,5 @@ class Circuit:
         self._calculate_J()
         self._calculate_E()
 
+        
 circuit = Circuit()
