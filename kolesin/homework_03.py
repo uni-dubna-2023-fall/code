@@ -3,7 +3,6 @@ import numpy as np
 
 class Node:
 
-
     def __init__(self, idx):
         self.idx = idx
         self.phi = None
