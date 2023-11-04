@@ -33,9 +33,9 @@ class Edge:
         self.tail = node
         node.attach(self, 1.0)
 
+
 class Circuit:
     
-
     def __init__(self):
         self.nodes = {}
         self.edges = {}
