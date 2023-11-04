@@ -1,5 +1,3 @@
-
-
 def reverse(arg):
     otvet = []
     for peremenay1 in arg:
