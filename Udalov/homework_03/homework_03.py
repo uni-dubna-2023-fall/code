@@ -51,18 +51,18 @@ class Circuit:
             edge_voltage = edge.e - edge.j * r
 
             if edge.node is not None:
-                tip_idx = edge.tip.idx
+                tip_idx = edge.node.idx
                 Z[tip_idx][tip_idx] += 1 / r
                 V[tip_idx] += edge_voltage / r
 
             if edge.node2 is not None:
-                tail_idx = edge.tail.idx
+                tail_idx = edge.node2.idx
                 Z[tail_idx][tail_idx] += 1 / r
                 V[tail_idx] -= edge_voltage / r
 
             if edge.node is not None and edge.node2 is not None:
-                tail_idx = edge.tail.idx
-                tip_idx = edge.tip.idx
+                tail_idx = edge.node2.idx
+                tip_idx = edge.node.idx
                 Z[tip_idx][tail_idx] -= 1 / r
                 Z[tail_idx][tip_idx] -= 1 / r
 
