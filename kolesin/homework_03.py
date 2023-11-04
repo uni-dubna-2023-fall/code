@@ -27,7 +27,7 @@ class Edge:
 
         self.tip = node
         node.attach(self, -1.0)
-    
+
     def attach_tail(self, node):
 
         self.tail = node
@@ -35,7 +35,7 @@ class Edge:
 
 
 class Circuit:
-    
+
     def __init__(self):
         self.nodes = {}
         self.edges = {}
@@ -43,13 +43,13 @@ class Circuit:
         self.Y = None
         self.J = None
         self.E = None
-    
+
     def add_node(self, node):
         self.nodes[node.idx] = node
-    
+
     def add_edge(self, edge):
         self.edges[edge.idx] = edge
-    
+
     def _calculate_A(self):
 
         num_nodes = len(self.nodes)
@@ -59,14 +59,14 @@ class Circuit:
             for j, edge_idx in enumerate(self.edges):
                 if edge_idx in self.nodes[node_idx].edges:
                     self.A[i, j] = self.nodes[node_idx].edges[edge_idx][1]
-    
+
     def _calculate_Y(self):
 
         num_edges = len(self.edges)
         self.Y = np.zeros((num_edges, num_edges))
         for edge_idx in self.edges:
             self.Y[edge_idx, edge_idx] = self.edges[edge_idx].y
-    
+
     def _calculate_J(self):
 
         num_nodes = len(self.nodes)
@@ -74,7 +74,7 @@ class Circuit:
         for node_idx in self.nodes:
             if self.nodes[node_idx].phi is not None:
                 self.J[node_idx, 0] = -self.nodes[node_idx].phi
-    
+                
     def _calculate_E(self):
 
         num_edges = len(self.edges)
