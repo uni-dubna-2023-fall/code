@@ -8,6 +8,7 @@ class Node:
     def attach(self, edge, direction):
         self.edges[edge.idx] = [edge, direction]
 
+
 class Edge:
     def __init__(self, idx, r, e=None, j=None):
         self.idx = idx
@@ -25,6 +26,7 @@ class Edge:
     def attach_tail(self, node):
         self.tail = node
         node.attach(self, 1.0)
+
 
 class Circuit:
     def __init__(self):
