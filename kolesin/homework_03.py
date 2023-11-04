@@ -14,7 +14,6 @@ class Node:
 
 class Edge:
 
-
     def __init__(self, idx, r, e=None, j=None):
         self.idx = idx
         self.r = r
@@ -24,18 +23,18 @@ class Edge:
         self.tip = None
         self.tail = None
     
-    def attach_tip(self, node):
+def attach_tip(self, node):
 
         self.tip = node
         node.attach(self, -1.0)
     
-    def attach_tail(self, node):
+def attach_tail(self, node):
 
         self.tail = node
         node.attach(self, 1.0)
 
 class Circuit:
-    
+
     
     def __init__(self):
 
