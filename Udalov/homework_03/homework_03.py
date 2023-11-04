@@ -20,6 +20,7 @@ class Edge:
         self.e = e
         self.j = j
         self.node = None
+        self.node2 = None
 
     def attach_tip(self, node):
         self.node = node
@@ -49,15 +50,21 @@ class Circuit:
             r = edge.r
             edge_voltage = edge.e - edge.j * r
 
-            if edge.tip is not None:
+            if edge.node is not None:
                 tip_idx = edge.tip.idx
                 Z[tip_idx][tip_idx] += 1 / r
                 V[tip_idx] += edge_voltage / r
 
-            if edge.tail is not None:
+            if edge.node2 is not None:
                 tail_idx = edge.tail.idx
                 Z[tail_idx][tail_idx] += 1 / r
                 V[tail_idx] -= edge_voltage / r
+
+            if edge.node is not None and edge.node2 is not None:
+                tail_idx = edge.tail.idx
+                tip_idx = edge.tip.idx
+                Z[tip_idx][tail_idx] -= 1 / r
+                Z[tail_idx][tip_idx] -= 1 / r
 
         self.phi = np.linalg.solve(Z, V)
 
