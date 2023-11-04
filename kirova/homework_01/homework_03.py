@@ -5,10 +5,8 @@ class Node:
         self.phi = None
         self.edges = {}
 
-    
     def attach(self, edge, direction):
         self.edges[edge.idx] = [edge, direction]
-
 
 class Edge:
     def __init__(self, idx, r, e=None, j=None):
@@ -20,16 +18,13 @@ class Edge:
         self.tip = None
         self.tail = None
 
-    
     def attach_tip(self, node):
         self.tip = node
         node.attach(self, -1.0)
 
-    
     def attach_tail(self, node):
         self.tail = node
         node.attach(self, 1.0)
-
 
 class Circuit:
     def __init__(self):
@@ -40,16 +35,13 @@ class Circuit:
         self.Y = None
         self.J = None
         self.E = None
-
     
     def add_node(self, node):
         self.nodes[node.idx] = node
 
-    
     def add_edge(self, edge):
         self.edges[edge.idx] = edge
 
-    
     def _calculate_A(self):
         self.A = []
         for node_idx in self.nodes:
@@ -61,7 +53,6 @@ class Circuit:
                     row.append(0.0)
             self.A.append(row)
 
-    
     def prepare(self):
         # calculate A
         self._calculate_A()
@@ -121,7 +112,6 @@ class Circuit:
             _AJYE.append(row)
         return _AJYE
 
-    
     def solve(self):
         AJYE = self.prepare()
         AYAE_T = np.add(AYA_T, AJYE)
