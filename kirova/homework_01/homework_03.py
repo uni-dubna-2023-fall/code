@@ -39,7 +39,6 @@ class Circuit:
         self.Y = None
         self.J = None
         self.E = None
-    
     def add_node(self, node):
         self.nodes[node.idx] = node
 
@@ -122,7 +121,6 @@ class Circuit:
         YAE_inv = np.linalg.inv(AYAE_T)
         YAJE = np.dot(YAE_inv, self.J)
         YAE = np.dot(YAE_inv, self.E)
-        
         for edge_idx in self.edges:
             self.edges[edge_idx].e = YAE[edge_idx]
             self.edges[edge_idx].j = YAJE[edge_idx]
