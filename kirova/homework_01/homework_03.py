@@ -118,7 +118,7 @@ class Circuit:
 
     def solve(self):
         AJYE = self.prepare()
-        AYAE_T = np.add(AYA_T, AJYE)
+        AYAE_T = np.add(self.AYA_T, AJYE)
         YAE_inv = np.linalg.inv(AYAE_T)
         YAJE = np.dot(YAE_inv, self.J)
         YAE = np.dot(YAE_inv, self.E)
