@@ -123,5 +123,5 @@ class Circuit:
         YAJE = np.dot(YAE_inv, self.J)
         YAE = np.dot(YAE_inv, self.E)
         for edge_idx in self.edges:
-            self.edges[edge_idx].e = YAE[edge_idx]
-            self.edges[edge_idx].j = YAJE[edge_idx]
+            self.edges[edge_idx].e = YAE[edge.idx]
+            self.edges[edge_idx].j = YAJE[edge.idx]
