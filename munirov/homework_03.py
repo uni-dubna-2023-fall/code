@@ -11,7 +11,7 @@ class Node:
 
     def set_phi(self, phi):
         self.phi = phi
-    
+
     def attach(self, edge, direction):
         self.edges[edge.idx] = [edge, direction]
 
