@@ -39,8 +39,8 @@ class Circuit:
         self.Y = None
         self.J = None
         self.E = None
-    def add_node(self, node):
-        self.nodes[node.idx] = node
+        def add_node(self, node):
+            self.nodes[node.idx] = node
 
     def add_edge(self, edge):
         self.edges[edge.idx] = edge
