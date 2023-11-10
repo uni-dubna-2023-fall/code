@@ -19,6 +19,7 @@ jobs:
         run: |
           pip install pylama
           pip install pytest
+          pip install numpy
       - name: Checkout source code
         uses: actions/checkout@v3
       - name: Run lint
