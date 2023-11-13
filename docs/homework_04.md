@@ -67,13 +67,13 @@ with ProbabilityMoments("distribution.json") as pm:
 **Подсказка:** Оценить среднее значение случайной величины можно по формуле:
 ```math
 \begin{equation}
-\mu = \frac{\sum_{i=1}^N X_i}{N}
+\mu = \dfrac{\sum\limits_{i=1}^{N} X_i}{N}
 \end{equation}
 ```
 Дисперсию можно оценить по следующей формуле:
 ```math
 \begin{equation}
-\sigma = \sqrt\frac{\sum_{i=1}^N (X_i - \mu)^2}{N}
+\sigma = \sqrt\frac{\sum\limits_{i=1}^{N} (X_i - \mu)^2}{N}
 \end{equation}
 ```
 
