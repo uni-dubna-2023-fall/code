@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 
 
 class Node:
@@ -12,16 +12,13 @@ class Node:
     def set_phi(self, phi):
         self.phi = phi
 
-    def attach(self, edge, direction):
-        self.edges[edge.idx] = [edge, direction]
-
 
 class Edge:
-    def __init__(self, idx, r, e=0.0, j=0.0):
+    def __init__(self, idx, resistance, voltage_source=0.0, current_source=0.0):
         self.idx = idx
-        self.r = r
-        self.e = e
-        self.j = j
+        self.resistance = resistance
+        self.voltage_source = voltage_source
+        self.current_source = current_source
         self.tip = None
         self.tail = None
 
@@ -44,30 +41,30 @@ class Circuit:
         self.edges.append(edge)
 
     def solve(self):
-        len_nodes = len(self.nodes)
+        num_nodes = len(self.nodes)
 
-        coefficient_matrix = [[0.0] * len_nodes for i in range(len_nodes)]
-        rhs_vector = [0.0] * len_nodes
+        A = np.zeros((num_nodes, num_nodes), dtype=float)
+        b = np.zeros(num_nodes, dtype=float)
 
         for edge in self.edges:
-            r = edge.r
-            edge_e = edge.e - edge.j * r
+            r = edge.resistance
+            edge_voltage = edge.voltage_source - edge.current_source * r
 
             if edge.tip is not None:
                 tip_idx = edge.tip.idx
-                coefficient_matrix[tip_idx][tip_idx] += 1 / r
-                rhs_vector[tip_idx] += edge_e / r
+                A[tip_idx, tip_idx] += 1 / r
+                b[tip_idx] += edge_voltage / r
 
             if edge.tail is not None:
                 tail_idx = edge.tail.idx
-                coefficient_matrix[tail_idx][tail_idx] += 1 / r
-                rhs_vector[tail_idx] -= edge_e / r
+                A[tail_idx, tail_idx] += 1 / r
+                b[tail_idx] -= edge_voltage / r
 
             if edge.tip is not None and edge.tail is not None:
-                coefficient_matrix[tip_idx][tail_idx] -= 1 / r
-                coefficient_matrix[tail_idx][tip_idx] -= 1 / r
+                A[tip_idx, tail_idx] -= 1 / r
+                A[tail_idx, tip_idx] -= 1 / r
 
-        self.phi = numpy.linalg.solve(coefficient_matrix, rhs_vector)
+        self.phi = np.linalg.solve(A, b)
 
-        for i in range(len_nodes):
+        for i in range(num_nodes):
             self.nodes[i].set_phi(self.phi[i])

@@ -4,16 +4,13 @@ import numpy
 class Node:
     def __init__(self, idx):
         self.idx = idx
-        self.phi = None
+        self.phi = None  # Потенциал точки
 
     def get_phi(self):
         return self.phi
 
     def set_phi(self, phi):
         self.phi = phi
-
-    def attach(self, edge, direction):
-        self.edges[edge.idx] = [edge, direction]
 
 
 class Edge:
@@ -46,8 +43,8 @@ class Circuit:
     def solve(self):
         len_nodes = len(self.nodes)
 
-        coefficient_matrix = [[0.0] * len_nodes for i in range(len_nodes)]
-        rhs_vector = [0.0] * len_nodes
+        A = [[0.0] * len_nodes for i in range(len_nodes)]
+        b = [0.0] * len_nodes
 
         for edge in self.edges:
             r = edge.r
@@ -55,19 +52,19 @@ class Circuit:
 
             if edge.tip is not None:
                 tip_idx = edge.tip.idx
-                coefficient_matrix[tip_idx][tip_idx] += 1 / r
-                rhs_vector[tip_idx] += edge_e / r
+                A[tip_idx][tip_idx] += 1 / r
+                b[tip_idx] += edge_e / r
 
             if edge.tail is not None:
                 tail_idx = edge.tail.idx
-                coefficient_matrix[tail_idx][tail_idx] += 1 / r
-                rhs_vector[tail_idx] -= edge_e / r
+                A[tail_idx][tail_idx] += 1 / r
+                b[tail_idx] -= edge_e / r
 
             if edge.tip is not None and edge.tail is not None:
-                coefficient_matrix[tip_idx][tail_idx] -= 1 / r
-                coefficient_matrix[tail_idx][tip_idx] -= 1 / r
+                A[tip_idx][tail_idx] -= 1 / r
+                A[tail_idx][tip_idx] -= 1 / r
 
-        self.phi = numpy.linalg.solve(coefficient_matrix, rhs_vector)
+        self.phi = numpy.linalg.solve(A, b)  # :)
 
         for i in range(len_nodes):
             self.nodes[i].set_phi(self.phi[i])
