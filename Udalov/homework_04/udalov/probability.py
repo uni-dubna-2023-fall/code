@@ -6,8 +6,6 @@ class ProbabilityMoments:
     def __init__(self, filename):
 
         self.filename = filename
-        with open(filename, 'w') as f:
-            f.close()
 
     def __enter__(self):
         with open(self.filename, 'r') as file:
@@ -17,12 +15,9 @@ class ProbabilityMoments:
     def __exit__(self, parametr):
         with open(self.filename, 'w') as f:
             json.dump(parametr, f)
-        pass
 
     def add(self, x):
-        with open(self.filename, 'a') as f:
-            json.dump(x, f)
-        pass
+        self.file_data += x
 
     def mean(self):
         res = 0
