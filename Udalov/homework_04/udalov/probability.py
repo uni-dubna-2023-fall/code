@@ -1,11 +1,13 @@
 import json
 import math
+
+
 class ProbabilityMoments:
     def __init__(self, filename):
+
         self.filename = filename
         with open(filename, 'w') as f:
             f.close()
-        pass
 
     def __enter__(self):
         with open(self.filename, 'r') as file:
@@ -23,15 +25,17 @@ class ProbabilityMoments:
         pass
 
     def mean(self):
-        res=0
+        res = 0
+        mu = 0
         for i in range(1, len(self.file_data)):
             res += self.file_data[i]
-            self.mu = res / len(self.file_data)
-        return self.mu
+            mu = res / len(self.file_data)
+        return mu
 
     def variance(self):
         res = 0
+        sigma = 0
         for i in range(1, len(self.file_data)):
-            res += ((self.file_data[i] - self.mu) ** 2)
-        self.sigma = math.sqrt(res / len(self.file_data))
-        return self.sigma
+            res += ((self.file_data[i] - ProbabilityMoments.mean(self)) ** 2)
+        sigma = math.sqrt(res / len(self.file_data))
+        return sigma
