@@ -1,5 +1,6 @@
 import json
 
+
 class ProbabilityMoments:
     def __init__(self, filename):
         self.filename = filename
@@ -22,7 +23,7 @@ class ProbabilityMoments:
 
     def mean(self):
         if self.data:
-            return sum(self.data) / len(self.data)  
+            return sum(self.data) / len(self.data) 
         else:
             None
 
@@ -30,5 +31,5 @@ class ProbabilityMoments:
         mu = self.mean()
         if self.data:
             return (sum((x - mu) ** 2 for x in self.data)) / len(self.data)
-        else: 
+        else:
             None
