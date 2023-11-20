@@ -1,40 +1,34 @@
-import math
-import m
+import json
 
+class ProbabilityMoments:
+    def __init__(self, filename):
+        self.filename = filename
+        self.data = []
 
-def shift(dx, dy):
-    def decorator(func):
-        def wrapper(*args):
-            a_args = []
-            for x, y in args:
-                shifted_x = x + dx
-                shifted_y = y + dy
-                a_args.append((shifted_x, shifted_y))
-            return func(*a_args)
-        return wrapper
-    return decorator
+    def __enter__(self):
+        try:
+            with open(self.filename, 'r') as file:
+                self.data = json.load(file)
+        except FileNotFoundError:
+            pass
+        return self
 
+    def __exit__(self, *args):
+        with open(self.filename, 'w') as file:
+            json.dump(self.data, file)
 
-def reflect(func):
-    def wrapper(*args):
-        reflected_args = []
-        for x, y in args:
-            reflected_x = -x
-            reflected_y = -y
-            reflected_args.append((reflected_x, reflected_y))
-        return func(*reflected_args)
-    return wrapper
+    def add(self, x):
+        self.data.append(x)
 
+    def mean(self):
+        if self.data:
+            return sum(self.data) / len(self.data)  
+        else:
+            None
 
-def rotate(angle):
-    def decorator(func):
-        def wrapper(*args):
-            radians = math.radians(angle)
-            povorot_args = []
-            for x, y in args:
-                rotated_x = x * math.cos(radians) - y * math.sin(radians)
-                rotated_y = x * math.sin(radians) + y * math.cos(radians)
-                povorot_args.append((rotated_x, rotated_y))
-            return func(*povorot_args)
-        return wrapper
-    return decorator
+    def variance(self):
+        mu = self.mean()
+        if self.data:
+            return (sum((x - mu) ** 2 for x in self.data)) / len(self.data)
+        else: 
+            None
