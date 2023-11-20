@@ -3,33 +3,31 @@ import os
 
 
 class ProbabilityMoments:
-    def __init__(self, fn):
-        self.fn = fn
-        self.data = []
+    def __init__(self, path):
+        self.path = path
+        self.numbers = []
 
     def __enter__(self):
-        if os.path.exists(self.fn):
-            with open(self.fn, 'r') as file:
-                self.data = json.load(file)
+        if os.path.isfile(self.path):
+            with open(self.path, 'r') as f:
+                self.numbers = json.load(f)
         return self
 
-    def __exit__(self, *exc_info):
-        with open(self.fn, 'w') as file:
-            json.dump(self.data, file)
+    def __exit__(self, *exc):
+        with open(self.path, 'w') as f:
+            json.dump(self.numbers, f)
 
-    def append(self, new_data):
-        self.data.append(new_data)
+    def insert(self, value):
+        self.numbers.append(value)
 
-    def calculate(self):
-        if self.data:
-            return sum(self.data) / len(self.data)
-        else:
-            None
+    def average(self):
+        if self.numbers:
+            return sum(self.numbers) / len(self.numbers)
+        return None
 
-    def _calculate_(self):
-        if len(self.data) >= 2:
-            mean_value = self.calculate()
-            summa = sum((h - mean_value) ** 2 for h in self.data)
-            return ((summa / len(self.data)) ** 0.5)
-        else:
-            return 0
+    def deviation(self):
+        if len(self.numbers) >= 2:
+            avg = self.average()
+            return (sum((n - avg) ** 2 for n in self.numbers) 
+                    / len(self.numbers)) ** 0.5
+        return 0
