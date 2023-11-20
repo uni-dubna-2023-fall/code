@@ -28,7 +28,7 @@ class ProbabilityMoments:
 
     def variance(self):
         if self.data:
-            mean_value = self.mean()
-            return sum((x - mean_value) ** 2 for x in self.data) / len(self.data)
+            mean_vale = self.mean()
+            return sum((x - mean_vale) ** 2 for x in self.data) / len(self.data)
         else:
             return None
