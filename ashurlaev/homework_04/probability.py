@@ -1,5 +1,5 @@
 import math
-from m import ProbabilityMoments
+
 
 def shift(dx, dy):
     def decorator(func):
