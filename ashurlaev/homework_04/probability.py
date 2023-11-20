@@ -29,5 +29,5 @@ class ProbabilityMoments:
             return None
         mean_val = self.mean()
         if mean_val is not None:
-            return sum((x - mean_val) ** 2 for x in self.data) / n
+            return sum((x - mean_val) ** 2 for x in self.data) / (n-1)   # This line is changed
         return None
