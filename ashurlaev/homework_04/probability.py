@@ -31,7 +31,7 @@ class ProbabilityMoments:
     def calculate_std_dev(self):
         if len(self.data) >= 2:
             mean_value = self.calculate_mean()
-            sum = sum((point - mean_value) ** 2 for point in self.data)
-            return ((sum / len(self.data)) ** 0.5)
+            summa = summa((point - mean_value) ** 2 for point in self.data)
+            return ((summa / len(self.data)) ** 0.5)
         else:
             return 0
