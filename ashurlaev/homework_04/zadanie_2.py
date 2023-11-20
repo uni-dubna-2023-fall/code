@@ -1,5 +1,6 @@
 import math
 
+
 def shift(dx, dy):
     def decorator(func):
         def wrapper(*args):
@@ -8,11 +9,13 @@ def shift(dx, dy):
         return wrapper
     return decorator
 
+
 def reflect(func):
     def wrapper(*args):
         new_args = [(-x, -y) for x, y in args]
         return func(*new_args)
     return wrapper
+
 
 def rotate(angle):
     def decorator(func):
@@ -23,6 +26,7 @@ def rotate(angle):
             return func(*new_args)
         return wrapper
     return decorator
+
 
 def compute(*args):
     for point in args:
