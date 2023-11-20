@@ -14,17 +14,16 @@ class ComplexNumber:
         return ComplexNumber(realnoe, mnimoe)
 
     def __mul__(self, novoe):
-        if isinstance(novoe, ComplexNumber):
-            realnoe = self.realnoe * novoe.realnoe - self.mnimoe * novoe.mnimoe
-            mnimoe = self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe
-            return ComplexNumber(realnoe, mnimoe)
+        realnoe = self.realnoe * novoe.realnoe - self.mnimoe * novoe.mnimoe
+        mnimoe = self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe
+        return ComplexNumber(realnoe, mnimoe)
 
     def __truediv__(self, novoe):
-            realnoe = (self.realnoe * novoe.realnoe + self.mnimoe * novoe.mnimoe) 
-            realnoe = realnoe / (novoe.mnimoe^2 + novoe.realnoe^2)
-            mnimoe = (self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe) 
-            mnimoe = mnimoe / (novoe.mnimoe^2 + novoe.realnoe^2)
-            return ComplexNumber(realnoe, mnimoe)
+        realnoe = self.realnoe * novoe.realnoe + self.mnimoe * novoe.mnimoe 
+        realnoe = realnoe / (novoe.mnimoe^2 + novoe.realnoe^2)
+        mnimoe = self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe
+        mnimoe = mnimoe / (novoe.mnimoe^2 + novoe.realnoe^2)
+        return ComplexNumber(realnoe, mnimoe)
     
     def __str__(self):
         return f"({self.realnoe}, {self.mnimoe})"
