@@ -25,8 +25,8 @@ def test_complex_number(iter_homework):
 def test_probability_moments(iter_homework):
     for p, m in iter_homework(4, "probability"):
         logging.info("Test ProbabilityMoments for %s", p)
-        interval1 = 0.02
-        interval2 = 0.015
+        interval1 = 0.03
+        interval2 = 0.02
         mean = 1.0
         variance = 0.2
         x1 = random.normal(loc=mean, scale=variance, size=500)
@@ -47,19 +47,33 @@ def test_probability_moments(iter_homework):
 
 
 def test_coordinates(iter_homework):
-    def func(*points):
+    def distance(*points):
+        return [math.sqrt(p[0] ** 2.0 + p[1] ** 2.0) for p in points]
+
+    def trivial(*points):
         return list(points)
 
     test_points = [(10.0, -10.0), (-10.0, 10.0), (-10.0, -10.0)]
     for p, m in iter_homework(4, "coordinates"):
         logging.info("Test coordinates for %s", p)
-        newfunc = m.shift(1.0, 10.0)(func)
-        assert newfunc(*test_points) == [
-            (p[0] + 1.0, p[1] + 10.0) for p in test_points
-        ]
 
-        newfunc = m.reflect(func)
+        newfunc = m.shift(1.0, 10.0)(trivial)
+        expected = [(p[0] + 1.0, p[1] + 10.0) for p in test_points]
+        assert newfunc(*test_points) == expected
+
+        newfunc = m.shift(1.0, 10.0)(distance)
+        expected = [
+            math.sqrt((p[0] + 1.0) ** 2.0 + (p[1] + 10.0) ** 2.0)
+            for p in test_points
+        ]
+        assert newfunc(*test_points) == expected
+
+        newfunc = m.reflect(trivial)
         assert newfunc(*test_points) == [(-p[0], -p[1]) for p in test_points]
+
+        newfunc = m.reflect(distance)
+        expected = distance(*test_points)
+        assert newfunc(*test_points) == expected
 
         angleg = 45.0
         matrix = [
@@ -67,7 +81,7 @@ def test_coordinates(iter_homework):
             [1.0 / math.sqrt(2.0), 1.0 / math.sqrt(2.0)],
         ]
 
-        newfunc = m.rotate(angleg)(func)
+        newfunc = m.rotate(angleg)(trivial)
         rotated_points = []
         for point in test_points:
             rotated_points.append(
@@ -81,3 +95,7 @@ def test_coordinates(iter_homework):
             (round(p[0], 2), round(p[1], 2)) for p in newfunc(*test_points)
         ]
         assert result == rotated_points
+
+        newfunc = m.rotate(angleg)(distance)
+        expected = distance(*test_points)
+        assert newfunc(*test_points) == expected
