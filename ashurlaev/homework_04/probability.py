@@ -1,41 +1,32 @@
-import math
-
+import json
+import os
 
 class ProbabilityMoments:
-    def __init__(self, data=None):
-        self.data = data or []
+    def __init__(self, filename):
+        self.filename = filename
+        self.data = []
 
-    def add(self, x, y):
-        self.data.append((x, y))
+    def __enter__(self):
+        if os.path.exists(self.filename):
+            with open(self.filename, 'r') as file:
+                self.data = json.load(file)
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        with open(self.filename, 'w') as file:
+            json.dump(self.data, file)
+
+    def add(self, x):
+        self.data.append(x)
 
     def mean(self):
-        if not self.data:
-            return None
-        sum_x = sum(x for x, _ in self.data)
-        sum_y = sum(y for _, y in self.data)
-        mean_x = sum_x / len(self.data)
-        mean_y = sum_y / len(self.data)
-        return mean_x, mean_y
+        return sum(self.data) / len(self.data) if self.data else None
 
     def variance(self):
-        if len(self.data) < 2:
-            return 0
-        mean_x, mean_y = self.mean()
-        var_x = sum((x - mean_x) ** 2 for x, _ in self.data) / len(self.data)
-        var_y = sum((y - mean_y) ** 2 for _, y in self.data) / len(self.data)
-        return var_x, var_y
-
-    def shift(self, dx, dy):
-        shifted_data = [(x + dx, y + dy) for x, y in self.data]
-        self.data = shifted_data
-
-    def reflect(self):
-        reflected_data = [(-x, -y) for x, y in self.data]
-        self.data = reflected_data
-
-    def rotate(self, angle):
-        radians = math.radians(angle)
-        rotated_data = [(x * math.cos(radians) - y * math.sin(radians),
-                         x * math.sin(radians) + y * math.cos(radians))
-                        for x, y in self.data]
-        self.data = rotated_data
+        n = len(self.data)
+        if n < 2:
+            return None
+        mean_val = self.mean()
+        if mean_val is not None:
+            return sum((x - mean_val) ** 2 for x in self.data) / n
+        return None
