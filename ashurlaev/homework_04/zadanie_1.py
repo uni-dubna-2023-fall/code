@@ -4,18 +4,25 @@ class ComplexNumber:
         self.mnimoe = mnimoe
 
     def __add__(self, novoe):
-        return ComplexNumber((self.realnoe + novoe.realnoe), (self.mnimoe + novoe.mnimoe))
+        realnoe = self.realnoe + novoe.realnoe
+        mnimoe = self.mnimoe + novoe.mnimoe
+        return ComplexNumber(realnoe, mnimoe)
 
     def __sub__(self, novoe):
-        return ComplexNumber(self.realnoe - novoe.realnoe, self.mnimoe - novoe.mnimoe)
+        realnoe = self.realnoe - novoe.realnoe
+        mnimoe = self.mnimoe - novoe.mnimoe
+        return ComplexNumber(realnoe, mnimoe)
 
     def __mul__(self, novoe):
         if isinstance(novoe, ComplexNumber):
-            return ComplexNumber(self.realnoe * novoe.realnoe - self.mnimoe * novoe.mnimoe, self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe)
+            realnoe = self.realnoe * novoe.realnoe - self.mnimoe * novoe.mnimoe
+            mnimoe = self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe
+            return ComplexNumber(realnoe, mnimoe)
 
     def __truediv__(self, novoe):
             realnoe = ((self.realnoe * novoe.realnoe + self.mnimoe * novoe.mnimoe) / (novoe.mnimoe^2 + novoe.realnoe^2))
             mnimoe = ((self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe) / (novoe.mnimoe^2 + novoe.realnoe^2))
             return ComplexNumber(realnoe, mnimoe)
+    
     def __str__(self):
         return f"({self.realnoe}, {self.mnimoe})"
