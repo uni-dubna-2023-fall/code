@@ -17,21 +17,19 @@ class ProbabilityMoments:
         with open(self.fn, 'w') as file:
             json.dump(self.data, file)
 
-    def append_data(self, new_data):
+    def append(self, new_data):
         self.data.append(new_data)
 
-    def calculate_mean(self):
-        if not self.data:
-            return None
+    def calculate(self):
+        if self.data:
+            return  sum(self.data) / len(self.data)
         else:
-            total_summa = sum(self.data)
-            num_points = len(self.data)
-            return total_summa / num_points
+            None
 
-    def calculate_std_dev(self):
+    def calculate(self):
         if len(self.data) >= 2:
-            mean_value = self.calculate_mean()
-            summa = sum((point - mean_value) ** 2 for point in self.data)
+            mean_value = self.calculate()
+            summa = sum((h - mean_value) ** 2 for h in self.data)
             return ((summa / len(self.data)) ** 0.5)
         else:
             return 0
