@@ -13,7 +13,9 @@ class ProbabilityMoments:
             return None
         sum_x = sum(x for x, _ in self.data)
         sum_y = sum(y for _, y in self.data)
-        return sum_x / len(self.data), sum_y / len(self.data)
+        mean_x = sum_x / len(self.data)
+        mean_y = sum_y / len(self.data)
+        return mean_x, mean_y
 
     def variance(self):
         if len(self.data) < 2:
@@ -33,8 +35,8 @@ class ProbabilityMoments:
 
     def rotate(self, angle):
         radians = math.radians(angle)
-        rotated_data = [(x * math.cos(radians) - y * math.sin(radians),
-                         x * math.sin(radians) + y * math.cos(radians))
+        rotated_data = [(x * math.cos(radians) - y * math.sin(radians), 
+                         x * math.sin(radians) + y * math.cos(radians)) 
                         for x, y in self.data]
         self.data = rotated_data
 
