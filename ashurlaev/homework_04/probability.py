@@ -34,6 +34,6 @@ class ProbabilityMoments:
     def rotate(self, angle):
         radians = math.radians(angle)
         rotated_data = [(x * math.cos(radians) - y * math.sin(radians),
-                         x * math.sin(radians) + y * math.cos(radians)) 
-                         for x, y in self.data]
+                         x * math.sin(radians) + y * math.cos(radians))
+                        for x, y in self.data]
         self.data = rotated_data
