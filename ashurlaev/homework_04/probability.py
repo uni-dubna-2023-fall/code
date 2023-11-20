@@ -28,6 +28,6 @@ class ProbabilityMoments:
     def deviation(self):
         if len(self.numbers) >= 2:
             avg = self.average()
-            return (sum((n - avg) ** 2 for n in self.numbers) 
+            return (sum((n - avg) ** 2 for n in self.numbers)
                     / len(self.numbers)) ** 0.5
         return 0
