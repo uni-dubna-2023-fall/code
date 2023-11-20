@@ -4,22 +4,16 @@ import math
 def shift(dx, dy):
     def decorator(func):
         def wrapper(*args):
-            changed_args = []
-            for x, y in args:
-                changed_args.append((x + dx, y + dy))
-            return func(*changed_args)
+            shifted_args = [(x + dx, y + dy) for x, y in args]
+            return func(*shifted_args)
         return wrapper
-
     return decorator
 
 
 def reflect(func):
     def wrapper(*args):
-        reflected_args = []
-        for x, y in args:
-            reflected_args.append((-x, -y))
+        reflected_args = [(-x, -y) for x, y in args]
         return func(*reflected_args)
-
     return wrapper
 
 
@@ -34,7 +28,5 @@ def rotate(angle):
                 rotated_y = x * sin_angle + y * cos_angle
                 rotated_args.append((rotated_x, rotated_y))
             return func(*rotated_args)
-
         return wrapper
-
     return decorator

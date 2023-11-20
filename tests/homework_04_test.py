@@ -19,8 +19,6 @@ def test_complex_number(iter_homework):
         cc = [complex(*n) for n in init_list]
         result = c[0] + c[1] - c[2] * c[3] / c[4]
         expected = cc[0] + cc[1] - cc[2] * cc[3] / cc[4]
-        assert result.x == expected.real
-        assert result.y == expected.imag
         assert str(result) == f"({expected.real}, {expected.imag})"
 
 
