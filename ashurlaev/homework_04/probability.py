@@ -27,4 +27,5 @@ class ProbabilityMoments:
         if len(self.data) < 2:
             return 0
         mean_val = self.mean()
-        return sum((x - mean_val) ** 2 for x in self.data) / len(self.data)
+        return ((sum((x - mean_val) ** 2 for x in self.data)
+                 / len(self.data)) ** 0.5)
