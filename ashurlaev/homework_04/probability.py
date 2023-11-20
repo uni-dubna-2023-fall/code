@@ -21,11 +21,13 @@ class ProbabilityMoments:
         self.data.append(x)
 
     def mean(self):
-        return sum(self.data) / len(self.data) if self.data else None
+        if self.data:
+            return sum(self.data) / len(self.data)
+        else:
+            return None
 
     def variance(self):
         if len(self.data) < 2:
             return 0
         mean_val = self.mean()
-        return ((sum((x - mean_val) ** 2 for x in self.data)
-                 / len(self.data)) ** 0.5)
+        return sum((x - mean_val) ** 2 for x in self.data) / len(self.data) ** 0.5
