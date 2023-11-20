@@ -1,5 +1,6 @@
 import json
 import os
+import math
 
 
 class ProbabilityMoments:
@@ -24,10 +25,16 @@ class ProbabilityMoments:
         return sum(self.data) / len(self.data) if self.data else None
 
     def variance(self):
-        n = len(self.data)
-        if n < 2:
+        if len(self.data) < 2:
             return None
-        t = self.mean()
-        if t is not None:
-            return sum((x - t) ** 2 for x in self.data) / (n - 1)
-        return None
+        mean_val = self.mean()
+        if mean_val is not None:
+            sum_squared_deviations = sum((x - mean_val) ** 2 for x in self.data)
+            variance_value = sum_squared_deviations / (len(self.data) - 1)
+            return variance_value
+        else:
+            return None
+
+    def standard_deviation(self):
+        variance_value = self.variance()
+        return math.sqrt(variance_value) if variance_value is not None else None
