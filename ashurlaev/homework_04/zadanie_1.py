@@ -20,8 +20,10 @@ class ComplexNumber:
             return ComplexNumber(realnoe, mnimoe)
 
     def __truediv__(self, novoe):
-            realnoe = ((self.realnoe * novoe.realnoe + self.mnimoe * novoe.mnimoe) / (novoe.mnimoe^2 + novoe.realnoe^2))
-            mnimoe = ((self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe) / (novoe.mnimoe^2 + novoe.realnoe^2))
+            realnoe = (self.realnoe * novoe.realnoe + self.mnimoe * novoe.mnimoe) 
+            realnoe = realnoe / (novoe.mnimoe^2 + novoe.realnoe^2)
+            mnimoe = (self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe) 
+            mnimoe = mnimoe / (novoe.mnimoe^2 + novoe.realnoe^2)
             return ComplexNumber(realnoe, mnimoe)
     
     def __str__(self):
