@@ -9,26 +9,23 @@ class ProbabilityMoments:
 
     def __enter__(self):
         if os.path.exists(self.filename):
-            with open(self.filename, 'r') as file:
-                self.data = json.load(file)
+            with open(self.filename, 'r') as f:
+                params = json.load(f)
+            self.data = params['data']
         return self
 
     def __exit__(self, *args):
-        with open(self.filename, 'w') as file:
-            json.dump(self.data, file)
+        params = {'data': self.data}
+        with open(self.filename, 'w') as f:
+            json.dump(params, f)
 
     def add(self, x):
         self.data.append(x)
 
     def mean(self):
-        if self.data:
-            return sum(self.data) / len(self.data)
-        else:
-            return None
+        return sum(self.data) / len(self.data)
 
     def variance(self):
-        if len(self.data) < 2:
-            return 0
-        mean_val = self.mean()
-        summa = sum((x - mean_val) ** 2 for x in self.data)
-        return (summa / len(self.data) ** 0.5)
+        mean = self.mean()
+        summa = [(x - mean)**2 for x in self.data]
+        return ((sum(summa) / len(self.data)) ** 0.5)
