@@ -26,10 +26,9 @@ class ProbabilityMoments:
         else:
             None
 
-    def calculate(self):
+    def _calculate_(self):
         if len(self.data) < 2:
-            return 0   
+            return 0
         mean_value = self.calculate()
         summa = sum((h - mean_value) ** 2 for h in self.data)
         return ((summa / len(self.data)) ** 0.5)
-        
