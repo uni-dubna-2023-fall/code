@@ -1,6 +1,5 @@
 import math
 
-
 class ProbabilityMoments:
     def __init__(self, data=None):
         self.data = data or []
@@ -39,6 +38,3 @@ class ProbabilityMoments:
                          x * math.sin(radians) + y * math.cos(radians))
                         for x, y in self.data]
         self.data = rotated_data
-
-
-probability_moments = ProbabilityMoments()
