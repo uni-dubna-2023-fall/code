@@ -37,4 +37,6 @@ class ProbabilityMoments:
                          x * math.sin(radians) + y * math.cos(radians))
                         for x, y in self.data]
         self.data = rotated_data
+
+
 moments = ProbabilityMoments()
