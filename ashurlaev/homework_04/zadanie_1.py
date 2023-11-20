@@ -24,6 +24,6 @@ class ComplexNumber:
         mnimoe = self.mnimoe * novoe.realnoe + self.realnoe * novoe.mnimoe
         mnimoe = mnimoe / (novoe.mnimoe ^ 2 + novoe.realnoe ^ 2)
         return ComplexNumber(realnoe, mnimoe)
-    
+
     def __str__(self):
         return f"({self.realnoe}, {self.mnimoe})"
