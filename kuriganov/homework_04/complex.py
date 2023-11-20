@@ -1,44 +1,40 @@
 class ComplexNumber:
-    def __init__(self, real, imaginary):
+    def __init__(self, real, im):
         self.real = real
-        self.imaginary = imaginary
+        self.im = im
 
-    def add(self, other):
-        real_sum = self.real + other.real
-        imaginary_sum = self.imaginary + other.imaginary
-        return ComplexNumber(real_sum, imaginary_sum)
+    def __add__(self, other):
+        if isinstance(other, ComplexNumber):
+            real = self.real + other.real
+            im = self.im + other.im
+            return ComplexNumber(real, im)
+        else:
+            raise TypeError("Нельзя складывать ComplexNumber с другим типом")
 
-    def subtract(self, other):
-        real_difference = self.real - other.real
-        imaginary_difference = self.imaginary - other.imaginary
-        return ComplexNumber(real_difference, imaginary_difference)
+    def __sub__(self, other):
+        if isinstance(other, ComplexNumber):
+            real = self.real - other.real
+            im = self.im - other.im
+            return ComplexNumber(real, im)
+        else:
+            raise TypeError("Нельзя вычитать из ComplexNumber другой тип")
 
-    def multiply(self, other):
-        real_product = (self.real * other.real) - (self.imaginary * other.imaginary)
-        imaginary_product = (self.real * other.imaginary) + (self.imaginary * other.real)
-        return ComplexNumber(real_product, imaginary_product)
+    def __mul__(self, other):
+        if isinstance(other, ComplexNumber):
+            real = self.real * other.real - self.im * other.im
+            im = self.real * other.im + self.im * other.real
+            return ComplexNumber(real, im)
+        else:
+            raise TypeError("Нельзя умножать ComplexNumber на другой тип")
 
-    def divide(self, other):
-        denominator = (other.real ** 2) + (other.imaginary ** 2)
-        real_quotient = ((self.real * other.real) + (self.imaginary * other.imaginary)) / denominator
-        imaginary_quotient = ((self.imaginary * other.real) - (self.real * other.imaginary)) / denominator
-        return ComplexNumber(real_quotient, imaginary_quotient)
-
-    def modulus(self):
-        return ((self.real ** 2) + (self.imaginary ** 2)) ** 0.5
-
-    def conjugate(self):
-        return ComplexNumber(self.real, -self.imaginary)
+    def __truediv__(self, other):
+        if isinstance(other, ComplexNumber):
+            denom = other.real**2 + other.im**2
+            real = (self.real * other.real + self.im * other.im) / denom
+            im = (self.im * other.real - self.real * other.im) / denom
+            return ComplexNumber(real, im)
+        else:
+            raise TypeError("Нельзя делить ComplexNumber на другой тип")
 
     def __str__(self):
-        if self.real == 0 and self.imaginary == 0:
-            return "0"
-        elif self.real == 0:
-            return str(self.imaginary) + "i"
-        elif self.imaginary == 0:
-            return str(self.real)
-        else:
-            if self.imaginary > 0:
-                return str(self.real) + " + " + str(self.imaginary) + "i"
-            else:
-                return str(self.real) + " - " + str(abs(self.imaginary)) + "i"
+        return f"({self.real}, {self.im})"

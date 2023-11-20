@@ -4,13 +4,13 @@ import json
 class ProbabilityMoments:
     def __init__(self, filename):
         self.filename = filename
-        self.data = {"values": []}
+        self.data = []
 
     def __enter__(self):
         try:
             with open(self.filename, 'r') as file:
                 self.data = json.load(file)
-        except (FileNotFoundError, json.JSONDecodeError):
+        except FileNotFoundError:
             pass
         return self
 
@@ -19,20 +19,15 @@ class ProbabilityMoments:
             json.dump(self.data, file)
 
     def add(self, x):
-        self.data["values"].append(x)
+        self.data.append(x)
 
     def mean(self):
-        values = self.data["values"]
-        if values:
-            return sum(values) / len(values)
-        else:
+        if len(self.data) == 0:
             return None
+        return sum(self.data) / len(self.data)
 
     def variance(self):
-        values = self.data["values"]
-        n = len(values)
-        if n > 1:
-            mean_value = self.mean()
-            return (sum([(x - mean_value) ** 2 for x in values]) / (n))**0.5
-        else:
+        if len(self.data) == 0:
             return None
+        mean = self.mean()
+        return (sum((x - mean)**2 for x in self.data) / len(self.data))**0.5
