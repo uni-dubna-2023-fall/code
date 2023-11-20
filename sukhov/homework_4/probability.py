@@ -1,4 +1,5 @@
 import json
+import math
 
 
 class ProbabilityMoments:
@@ -32,5 +33,6 @@ class ProbabilityMoments:
         if len(values) < 2:
             return 0
         mean_value = self.mean()
-        variance = sum((x - mean_value) ** 2 for x in values) / (len(values) - 1)
+        variance = sum((x - mean_value) ** 2 for x in values
+                       ) / (len(values) - 1)
         return math.sqrt(variance)
