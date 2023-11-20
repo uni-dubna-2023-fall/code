@@ -23,7 +23,7 @@ class ProbabilityMoments:
 
     def mean(self):
         if self.data:
-            return sum(self.data) / len(self.data) 
+            return sum(self.data) / len(self.data)
         else:
             None
 
