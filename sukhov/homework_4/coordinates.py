@@ -23,7 +23,7 @@ def rotate(angle):
             cos_angle = math.cos(math.radians(angle))
             sin_angle = math.sin(math.radians(angle))
             new_args = [(x * cos_angle - y * sin_angle,
-                x * sin_angle + y * cos_angle) for x, y in args]
+                        x * sin_angle + y * cos_angle) for x, y in args]
             return func(*new_args) if new_args else func()
         return wrapper
     return decorator
