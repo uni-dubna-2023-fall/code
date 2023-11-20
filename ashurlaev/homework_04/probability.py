@@ -1,40 +1,37 @@
 import json
 import os
-import math
 
 
-class ProbabilityMoments:
-    def __init__(self, filename):
-        self.filename = filename
-        self.data = []
+class AnalyzeData:
+    def __init__(self, file_path):
+        self.file_path = file_path
+        self.data_points = []
 
     def __enter__(self):
-        if os.path.exists(self.filename):
-            with open(self.filename, 'r') as file:
-                self.data = json.load(file)
+        if os.path.exists(self.file_path):
+            with open(self.file_path, 'r') as file_handle:
+                self.data_points = json.load(file_handle)
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        with open(self.filename, 'w') as file:
-            json.dump(self.data, file)
+    def __exit__(self, *exc_info):
+        with open(self.file_path, 'w') as file_handle:
+            json.dump(self.data_points, file_handle)
 
-    def add(self, x):
-        self.data.append(x)
+    def append_data(self, new_data):
+        self.data_points.append(new_data)
 
-    def mean(self):
-        return sum(self.data) / len(self.data) if self.data else None
-
-    def variance(self):
-        if len(self.data) < 2:
-            return None
-        mean_val = self.mean()
-        if mean_val is not None:
-            sum_squared_deviations = sum((x - mean_val) ** 2 for x in self.data)
-            variance_value = sum_squared_deviations / (len(self.data) - 1)
-            return variance_value
+    def calculate_mean(self):
+        if self.data_points:
+            total_sum = sum(self.data_points)
+            num_points = len(self.data_points)
+            return total_sum / num_points
         else:
             return None
 
-    def standard_deviation(self):
-        variance_value = self.variance()
-        return math.sqrt(variance_value) if variance_value is not None else None
+    def calculate_std_dev(self):
+        if len(self.data_points) >= 2:
+            mean_value = self.calculate_mean()
+            var_sum = sum((point - mean_value) ** 2 for point in self.data_points)
+            return (var_sum / len(self.data_points)) ** 0.5
+        else:
+            return 0
