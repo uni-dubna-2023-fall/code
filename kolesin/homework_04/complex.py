@@ -1,4 +1,5 @@
 class ComplexNumber:
+
     def __init__(self, real, imaginary):
         self.real = real
         self.imaginary = imaginary
@@ -15,15 +16,17 @@ class ComplexNumber:
 
     def __mul__(self, other):
         real_prod = self.real * other.real - self.imaginary * other.imaginary
-        imaginary_prod = self.real * other.imaginary + self.imaginary * other.real
+        imaginary_prod = (self.real * other.imaginary
+                          + self.imaginary * other.real)
         return ComplexNumber(real_prod, imaginary_prod)
 
     def __truediv__(self, other):
         denominator = other.real**2 + other.imaginary**2
-        real_quot = (self.real * other.real + self.imaginary * other.imaginary) / denominator
-        imaginary_quot = (self.imaginary * other.real - self.real * other.imaginary) / denominator
+        real_quot = ((self.real * other.real
+                      + self.imaginary * other.imaginary) / denominator)
+        imaginary_quot = ((self.imaginary * other.real
+                          - self.real * other.imaginary) / denominator)
         return ComplexNumber(real_quot, imaginary_quot)
 
     def __str__(self):
         return f"({self.real}, {self.imaginary})"
- 
