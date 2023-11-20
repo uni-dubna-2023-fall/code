@@ -1,5 +1,6 @@
 import math
 
+
 class ProbabilityMoments:
     def __init__(self, data=None):
         self.data = data or []
