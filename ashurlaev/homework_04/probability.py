@@ -3,32 +3,32 @@ import os
 
 
 class ProbabilityMoments:
-    def __init__(self, fn):
-        self.fn = fn
+    def __init__(self, filename):
+        self.filename = filename
         self.data = []
 
     def __enter__(self):
-        if os.path.exists(self.fn):
-            with open(self.fn, 'r') as file:
+        if os.path.exists(self.filename):
+            with open(self.filename, 'r') as file:
                 self.data = json.load(file)
         return self
 
-    def __exit__(self, *exc_info):
-        with open(self.fn, 'w') as file:
+    def __exit__(self, *args):
+        with open(self.filename, 'w') as file:
             json.dump(self.data, file)
 
-    def append(self, new_data):
-        self.data.append(new_data)
+    def add(self, x):
+        self.data.append(x)
 
-    def calculate(self):
+    def mean(self):
         if self.data:
             return sum(self.data) / len(self.data)
         else:
-            None
+            return None
 
-    def _calculate_(self):
-        if len(self.data) < 2:
-            return 0
-        mean_value = self.calculate()
-        summa = sum((h - mean_value) ** 2 for h in self.data)
-        return ((summa / len(self.data)) ** 0.5)
+    def variance(self):
+        if self.data:
+            mean_value = self.mean()
+            return sum((x - mean_value) ** 2 for x in self.data) / len(self.data)
+        else:
+            return None
