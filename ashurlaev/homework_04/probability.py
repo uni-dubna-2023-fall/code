@@ -24,14 +24,14 @@ class ProbabilityMoments:
         if not self.data:
             return None
         else:
-            total_summa = summa(self.data)
+            total_summa = sum(self.data)
             num_points = len(self.data)
             return total_summa / num_points
 
     def calculate_std_dev(self):
         if len(self.data) >= 2:
             mean_value = self.calculate_mean()
-            summa = summa((point - mean_value) ** 2 for point in self.data)
+            summa = sum((point - mean_value) ** 2 for point in self.data)
             return ((summa / len(self.data)) ** 0.5)
         else:
             return 0
