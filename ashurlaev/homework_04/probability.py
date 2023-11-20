@@ -1,6 +1,7 @@
 import json
 import os
 
+
 class ProbabilityMoments:
     def __init__(self, filename):
         self.filename = filename
