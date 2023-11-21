@@ -8,8 +8,8 @@ def shift(dx, dy):
             for x, y in args:
                 new_args.append((x + dx, y + dy))
             return func(new_args)
-        return wrapper()
-    return decorator()
+        return wrapper
+    return decorator
 
 
 def reflect(func):
@@ -18,7 +18,7 @@ def reflect(func):
         for x, y in args:
             new_args.append((-x, -y))
         return func(*new_args)
-    return wrapper()
+    return wrapper
 
 
 def rotate(phi):
@@ -30,5 +30,5 @@ def rotate(phi):
             for x, y in args:
                 new_args.append((x * cos - y * sin, x * sin + y * cos))
             return func(new_args)
-        return wrapper()
-    return sec_decorator()
+        return wrapper
+    return sec_decorator
