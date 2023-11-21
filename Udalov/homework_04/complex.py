@@ -15,7 +15,7 @@ class ComplexNumber:
         if isinstance(other, ComplexNumber):
             return ComplexNumber(self.real * other.real
                                  - self.imag * other.imag,
-                                 self.imag * other.real 
+                                 self.imag * other.real
                                  + self.real * other.imag)
 
     def __str__(self):
