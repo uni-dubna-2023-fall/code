@@ -28,4 +28,3 @@ class ComplexNumber:
 
     def __str__(self):
         return f"({self.real}, {self.imag})"
-        
