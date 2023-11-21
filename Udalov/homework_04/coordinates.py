@@ -2,7 +2,6 @@ import math
 
 
 def shift(dx, dy):
-    def decorator(func):
         def wrapper(*args):
             new_args = []
             for x, y in args:
@@ -11,7 +10,6 @@ def shift(dx, dy):
 
         return wrapper()
 
-    return decorator()
 
 
 def reflect(func):
@@ -25,7 +23,6 @@ def reflect(func):
 
 
 def rotate(phi):
-    def decorator(func):
         def wrapper(*args):
             new_args = []
             cos = math.cos(math.radians(phi))
@@ -36,4 +33,3 @@ def rotate(phi):
 
         return wrapper()
 
-    return decorator()
