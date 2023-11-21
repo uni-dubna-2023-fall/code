@@ -4,7 +4,7 @@ import math
 
 class ProbabilityMoments:
     def __init__(self, filename):
-        self.file_data = {'values': []}
+        self.file_data = []
         self.filename = filename
 
     def __enter__(self):
@@ -20,7 +20,7 @@ class ProbabilityMoments:
             json.dump(self.file_data, f)
 
     def add(self, x):
-        self.file_data['values'].append(x)
+        self.file_data.append(x)
 
     def mean(self):
         if self.file_data:
@@ -32,7 +32,7 @@ class ProbabilityMoments:
         if len(self.file_data) < 2:
             return 0
         res = 0
-        for i in range(1, len(self.file_data)):
-            res += ((self.file_data[i] - self.mean()) ** 2)
+        for i in self.file_data:
+            res += (i - self.mean()) ** 2
         sigma = math.sqrt(res / len(self.file_data))
         return sigma
