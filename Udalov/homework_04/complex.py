@@ -19,7 +19,7 @@ class ComplexNumber:
                                  + self.real * other.imag)
 
     def __str__(self):
-        return '(%g, %g)' % (self.real, self.imag)
+        return f"({self.real}, {self.imag})"
 
     def __truediv__(self, other):
         if isinstance(other, ComplexNumber):
