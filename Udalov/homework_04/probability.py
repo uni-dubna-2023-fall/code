@@ -23,16 +23,16 @@ class ProbabilityMoments:
         self.file_data['values'].append(x)
 
     def mean(self):
-        res = 0
-        mu = 0
-        for i in range(1, len(self.file_data)):
-            res += self.file_data[i]
-            mu = res / len(self.file_data)
-        return mu
+        if self.file_data:
+            return sum(self.file_data) / len(self.file_data)
+        else:
+            return None
 
     def variance(self):
+        if len(self.file_data) < 2:
+            return 0
         res = 0
         for i in range(1, len(self.file_data)):
-            res += ((self.file_data[i] - self.mean(self)) ** 2)
+            res += ((self.file_data[i] - self.mean()) ** 2)
         sigma = math.sqrt(res / len(self.file_data))
         return sigma
