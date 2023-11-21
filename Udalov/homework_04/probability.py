@@ -8,9 +8,10 @@ class ProbabilityMoments:
         self.filename = filename
 
     def __enter__(self):
-        with open(self.filename, 'r') as file:
-            self.file_data = json.load(file)
-        return self.file_data
+        try: 
+            with open(self.filename, 'r') as file:
+                self.file_data = json.load(file)
+            return self.file_data
 
     def __exit__(self, parametr):
         with open(self.filename, 'w') as f:
