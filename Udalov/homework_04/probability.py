@@ -31,6 +31,6 @@ class ProbabilityMoments:
         res = 0
         sigma = 0
         for i in range(1, len(self.file_data)):
-            res += ((self.file_data[i] - ProbabilityMoments.mean(self)) ** 2)
+            res += ((self.file_data[i] - self.mean(self)) ** 2)
         sigma = math.sqrt(res / len(self.file_data))
         return sigma
