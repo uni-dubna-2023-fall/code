@@ -5,14 +5,19 @@ import pytest
 
 @pytest.fixture
 def iter_homework():
-    def iterator(number):
+    def iterator(number, nested=""):
         parent = Path(__file__).parents[1]
+        pattern = "homework_%02d" % number
+        if not nested:
+            pattern += ".py"
+        else:
+            pattern += f"/{nested}.py"
         homeworks = set(_ for _ in Path.rglob(
-            parent, "homework_%02d.py" % number))
+            parent, pattern))
         for hwpath in homeworks:
             spec = importlib.util.spec_from_file_location(
-                "homework_%02d" % number, hwpath)
+                "m", hwpath)
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
-            yield hwpath.parent.stem, module
+            yield hwpath, module
     return iterator
