@@ -20,6 +20,6 @@ class ComplexNumber:
 
     def __truediv__(self, other):
         sr, si, oR, oi = self.real, self.imag, \
-            other.real, other.imag  # short forms
+            other.real, other.imag
         r = float(oR ** 2 + oi ** 2)
         return ComplexNumber((sr * oR + si * oi) / r, (si * oR - sr * oi) / r)
