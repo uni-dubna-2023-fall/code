@@ -40,3 +40,4 @@ class ProbabilityMoments:
         if self.count <= 1:
             return 0
         return (self.squared_sum / self.count) - (self.mean() ** 2)
+
