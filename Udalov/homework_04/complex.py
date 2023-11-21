@@ -18,7 +18,7 @@ class ComplexNumber:
     def __str__(self):
         return '(%g, %g)' % (self.real, self.imag)
 
-    def __div__(self, other):
+    def __truediv__(self, other):
         sr, si, oR, oi = self.real, self.imag, \
             other.real, other.imag  # short forms
         r = float(oR ** 2 + oi ** 2)
