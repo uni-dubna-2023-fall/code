@@ -54,6 +54,7 @@ class Manager:
     def list_tasks(self):
         return list(self.tasks.keys())
 
+
 @app.route('/multiply', methods=['POST'])
 def multiply():
     data = request.get_json()
@@ -105,13 +106,14 @@ def get_result(task_id):
 
 
 @app.route('/remove/<task_id>', methods=['DELETE'])
-def remove_task( task_id):
+def remove_task(task_id):
     if task_id in list:
         del list[task_id]
         return jsonify({"task_id": task_id, "status": "ok"})
     else:
         return jsonify({"task_id": task_id, "status": "not_found"}), 404
     pass
+
 
 if __name__ == '__main__':
     app.run()
