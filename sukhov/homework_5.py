@@ -10,16 +10,25 @@ class Manager:
         self.task_counter = 0
         self.pool = multiprocessing.Pool()
 
-    def run(self):
-        app.run()
-
     def stop(self):
         self.pool.close()
         self.pool.join()
 
     def multiply_matrices(self, matrices):
         matrix_a, matrix_b = matrices
-        result = np.dot(matrix_a, matrix_b)
+        result_shape = (matrix_a.shape[0], matrix_b.shape[1])
+        result = np.zeros(result_shape)
+
+        chunk_size = result_shape[0] // len(self.pool._pool)
+        chunks = [(i * chunk_size, (i + 1) * chunk_size) for i in range(len(self.pool._pool) - 1)]
+        chunks.append(((len(self.pool._pool) - 1) * chunk_size, result_shape[0]))
+
+        with multiprocessing.Pool() as pool:
+            results = pool.starmap(np.dot, [(matrix_a[start:end, :], matrix_b) for start, end in chunks])
+
+        for i, (start, end) in enumerate(chunks):
+            result[start:end, :] = results[i]
+
         return result.tolist()
 
     def add_task(self, matrix_a, matrix_b):
@@ -27,8 +36,7 @@ class Manager:
         self.tasks[task_id] = {
             'status': 'running',
             'result': None,
-            'task': self.pool.apply_async
-            (self.multiply_matrices, args=((matrix_a, matrix_b),))
+            'task': self.pool.apply_async(self.multiply_matrices, args=((matrix_a, matrix_b),))
         }
         self.task_counter += 1
         return task_id
@@ -94,4 +102,4 @@ def remove_task(task_id):
 
 
 if __name__ == '__main__':
-    manager.run()
+    app.run()
