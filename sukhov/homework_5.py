@@ -30,8 +30,8 @@ class Manager:
 
         with multiprocessing.Pool() as pool:
             results = pool.starmap(
-         np.dot,
-        [(matrix_a[start:end, :], matrix_b) for start, end in chunks]
+                np.dot,
+                [(matrix_a[start:end, :], matrix_b) for start, end in chunks]
             )
 
         for i, (start, end) in enumerate(chunks):
