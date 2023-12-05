@@ -23,7 +23,9 @@ class Manager:
         chunks = []
         for i in range(len(self.pool._pool) - 1):
             chunks.append((i * chunk_size, (i + 1) * chunk_size))
-        chunks.append(((len(self.pool._pool)- 1) * chunk_size, result_shape[0]))
+        last_chunk_start = (len(self.pool._pool) - 1) * chunk_size
+        last_chunk_end = result_shape[0]
+        chunks.append((last_chunk_start, last_chunk_end))
 
 
         with multiprocessing.Pool() as pool:
@@ -42,7 +44,10 @@ class Manager:
         self.tasks[task_id] = {
             'status': 'running',
             'result': None,
-            'task': self.pool.apply_async(self.multiply_matrices, args=(matrix_a, matrix_b))
+            'task': self.pool.apply_async(
+            self.multiply_matrices,
+            args=(matrix_a, matrix_b)
+            )
         }
         self.task_counter += 1
         return task_id
