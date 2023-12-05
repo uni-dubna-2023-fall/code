@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import numpy as np
 import multiprocessing
+
 app = Flask(__name__)
 
 
@@ -27,11 +28,10 @@ class Manager:
         last_chunk_end = result_shape[0]
         chunks.append((last_chunk_start, last_chunk_end))
 
-
         with multiprocessing.Pool() as pool:
             results = pool.starmap(
-                np.dot,
-                [(matrix_a[start:end, :], matrix_b) for start, end in chunks]
+         np.dot,
+        [(matrix_a[start:end, :], matrix_b) for start, end in chunks]
             )
 
         for i, (start, end) in enumerate(chunks):
@@ -45,8 +45,8 @@ class Manager:
             'status': 'running',
             'result': None,
             'task': self.pool.apply_async(
-            self.multiply_matrices,
-            args=(matrix_a, matrix_b)
+                self.multiply_matrices,
+                args=(matrix_a, matrix_b)
             )
         }
         self.task_counter += 1
