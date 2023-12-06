@@ -37,8 +37,10 @@ def index(words):
     return index_dict
 
 
+
 arg = ["her", "name", "is", "Masha", "Masha",
         "is", "a", "sister", "of", "Zhenya"]
+arg = ["her", "name", "is", "Masha", "Masha", "is", "a", "sister", "of", "Zhenya"]
 result = index(arg)
 print("4)")
 for word, indexes in result.items():
