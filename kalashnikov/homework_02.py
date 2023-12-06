@@ -6,8 +6,6 @@ arg = ["my", "name", "is", "Masha"]
 result = reverse(arg)
 print("1)", result, "\n")
 
-
-
 def avglen(words):
     total_length = sum(len(word) for word in words)
     average_length = total_length / len(words)
@@ -17,8 +15,6 @@ def avglen(words):
 arg = ["a", "ab", "abc"]
 result = avglen(arg)
 print("2)", result, "\n")
-
-
 
 def index(words):
     index_dict = {}
@@ -38,8 +34,6 @@ for word, indexes in result.items():
     print(f"{word}: {indexes}")
 print("\n")
 
-
-
 def coincidence(list1, list2):
     return list(set(list1) & set(list2))
 
@@ -48,8 +42,6 @@ arg1 = ["my", "name", "is", "Masha"]
 arg2 = ["my", "name", "is", "Zhenya"]
 result = coincidence(arg1, arg2)
 print("4)", result, "\n")
-
-
 
 def count(words):
     counts = {}
@@ -61,8 +53,6 @@ def count(words):
 arg = ["aaa", "aaa", "bbb", "ccc", "bbb"]
 result = count(arg)
 print("5)", result, "\n")
-
-
 
 def lensort(words):
     return sorted(words, key=len)
