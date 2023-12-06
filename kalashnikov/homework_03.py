@@ -13,7 +13,6 @@ class Node:
         return phi / len(self.edges)
 
 
-
 class Edge:
     def __init__(self, idx, r, e=0.0, j=0.0):
         self.idx = idx  # Индекс компонента цепи
