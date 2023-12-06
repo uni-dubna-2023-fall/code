@@ -1,3 +1,7 @@
+def reverse(lst):
+    return lst[::-1]
+
+
 arg = ["my", "name", "is", "Masha"]
 result = reverse(*arg)
 print("2) ", result, "\n")
