@@ -24,6 +24,19 @@ def index(words):
     return index_dict
 
 
+def count(words):
+    counts = {}
+    index = 0
+    while index < len(words):
+        word = words[index]
+        if word in counts:
+            counts[word] += 1
+        else:
+            counts[word] = 1
+        index += 1
+    return counts
+
+
 def coincidence(list1, list2):
     common_elements = []
     for item1 in list1:
