@@ -1,16 +1,22 @@
 def reverse(lst):
-    return lst[::-1]
+    reversed_lst = []
+    for i in range(len(lst)-1, -1, -1):
+        reversed_lst.append(lst[i])
+    return reversed_lst
 
 
 def avglen(words):
-    total_length = sum(len(word) for word in words)
+    total_length = 0
+    for word in words:
+        total_length += len(word)
     average_length = total_length / len(words)
     return average_length
 
 
 def index(words):
     index_dict = {}
-    for i, word in enumerate(words):
+    for i in range(len(words)):
+        word = words[i]
         if word in index_dict:
             index_dict[word].append(i)
         else:
@@ -19,8 +25,15 @@ def index(words):
 
 
 def coincidence(list1, list2):
-    return list(set(list1) & set(list2))
-
+    common_elements = []
+    for item1 in list1:
+        if item1 in list2 and item1 not in common_elements:
+            common_elements.append(item1)
+    return common_elements
 
 def lensort(words):
-    return sorted(words, key=len)
+    for i in range(len(words)):
+        for j in range(i + 1, len(words)):
+            if len(words[i]) > len(words[j]):
+                words[i], words[j] = words[j], words[i]
+    return words

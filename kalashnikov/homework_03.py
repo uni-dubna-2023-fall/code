@@ -84,33 +84,3 @@ class Circuit:
 
         for i, node in enumerate(self.nodes):
             node.phi = potentials[i]
-
-
-n0 = Node(0)
-n1 = Node(1)
-
-e0 = Edge(0, 100.0)
-e1 = Edge(1, 100.0)
-e2 = Edge(2, 100.0)
-e3 = Edge(3, 100.0)
-e4 = Edge(4, 100.0, 5.0)
-
-e0.attach_tip(n0)
-e1.attach_tip(n0)
-e2.attach_tip(n1)
-e3.attach_tip(n1)
-e3.attach_tail(n0)
-e4.attach_tail(n1)
-
-c = Circuit()
-c.add_node(n0)
-c.add_node(n1)
-c.add_edge(e0)
-c.add_edge(e1)
-c.add_edge(e2)
-c.add_edge(e3)
-c.add_edge(e4)
-
-c.solve()
-print(f"\u03C6_0 = {n0.get_phi()}")
-print(f"\u03C6_1 = {n1.get_phi()}")
