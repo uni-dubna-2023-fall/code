@@ -45,4 +45,3 @@ class Circuit:
     def print_node_potentials(self):
         for node in self.nodes:
             print(f"\u03C6_{node.node_id} = {node.get_phi()}")
-            
