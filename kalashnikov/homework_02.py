@@ -18,11 +18,18 @@ def index(words):
     for i in range(len(words)):
         word = words[i]
         if word in index_dict:
-            index_dict[word].append([i])
+            index_dict[word].append(str(i))
         else:
-            index_dict[word] = [[i]]
+         index_dict[word] = [str(i)]
     return index_dict
 
+
+arg = ["her", "name", "is", "Masha", "Masha",
+       "is", "a", "sister", "of", "Zhenya"]
+result = index(arg)
+for word, indexes in result.items():
+    formatted_indexes = ', '.join(str(idx) for idx in indexes)
+    print(f"{word}: {formatted_indexes}")
 
 def count(words):
     counts = {}
