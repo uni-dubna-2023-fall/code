@@ -20,7 +20,7 @@ def index(words):
         if word in index_dict:
             index_dict[word].append(i)
         else:
-            index_dict[word] = i
+            index_dict[word] = [i]
     return index_dict
 
 
