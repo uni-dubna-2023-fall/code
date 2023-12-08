@@ -18,9 +18,12 @@ def index(words):
     for i in range(len(words)):
         word = words[i]
         if word in index_dict:
-            index_dict[word].append(i)
+            if isinstance(index_dict[word], int):
+                index_dict[word] = [index_dict[word], i]
+            else:
+                index_dict[word].append(i)
         else:
-            index_dict[word] = [i]
+            index_dict[word] = i
     return index_dict
 
 
