@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import numpy as np
 import uuid
-import random
+
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ class Manager:
 
     def generate_task_id(self):
         return str(uuid.uuid4())
-    
+
     def run(self):
         app.run()
 
@@ -46,6 +46,7 @@ class Manager:
 
 manager = Manager()
 
+
 @app.route('/multiply', methods=['POST'])
 def multiply():
     matrix_data = request.get_json()
@@ -56,15 +57,18 @@ def multiply():
 
     return jsonify({"task_id": task_id, "status": "running"})
 
+
 @app.route('/status/<task_id>', methods=['GET'])
 def status_task(task_id):
     task_status = manager.status_task(int(task_id))
     return jsonify({"task_id": task_id, "status": task_status})
 
+
 @app.route('/result/<task_id>', methods=['GET'])
 def get_result(task_id):
     task_result = manager.get_result(int(task_id))
     return jsonify({"task_id": task_id, "result": task_result})
+
 
 if __name__ == '__main__':
     manager.run()
