@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 
 class Manager:
+
     def __init__(self):
         self.tasks = {}
         self.tasks_counter = 0
@@ -50,7 +51,7 @@ class Manager:
         list_of_task_ids = self.tasks.keys()
         return list_of_task_ids
 
-manager = Manger()
+manager = Manager()
 
 @app.route('/multiply', methods=['POST'])
 def multiply():
@@ -75,10 +76,12 @@ def status_task(task_id):
     }
     return json.dumps(data_pro)
 
+
 @app.route('/tasks', methods=['GET'])
 def list_task():
     tasks = manager.list_tasks()
     return json.dumps(tasks)
+
 
 @app.route('/result/<task_id>', methods=['GET'])
 def get_result(task_id):
