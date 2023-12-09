@@ -53,6 +53,7 @@ class Manager:
 
 manager = Manager()
 
+
 @app.route('/multiply', methods=['POST'])
 def multiply():
     data = request.get_json()
