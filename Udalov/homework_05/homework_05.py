@@ -11,15 +11,26 @@ class Manager:
         self.tasks = {}
         self.tasks_counter = 0
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6957085c171ed79c6d4bd3908726950e15de2149
     def multiply_matrix(self, matrix_a, matrix_b):
         a = np.array(matrix_a)
         b = np.array(matrix_b)
         result = a.dot(b)
         return result
 
+<<<<<<< HEAD
     def add_task(self, matrix_a, matrix_b):
         task_id = str(self.tasks_counter)
         self.tasks_counter += 1
+=======
+
+    def add_task(self, matrix_a, matrix_b):
+        task_id = str(self.tasks_counter)
+        self.tasks_counter+=1
+>>>>>>> 6957085c171ed79c6d4bd3908726950e15de2149
         self.tasks[task_id] = {
             'status' : 'running',
             'result' : ''
@@ -37,7 +48,11 @@ class Manager:
             return self.tasks[task_id]['status']
 
     def get_result(self, task_id, matrix_a, matrix_b):
+<<<<<<< HEAD
         result = self.multiply_matrix(matrix_a, matrix_b)
+=======
+        result = multiply_matrix(matrix_a, matrix_b)
+>>>>>>> 6957085c171ed79c6d4bd3908726950e15de2149
         self.tasks[task_id]['result'] = result
         self.tasks[task_id]['status'] = 'finished'
         return result
@@ -52,6 +67,10 @@ class Manager:
 
 manager = Manger()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6957085c171ed79c6d4bd3908726950e15de2149
 @app.route('/multiply', methods=['POST'])
 def multiply():
     data = request.get_json()
@@ -80,6 +99,10 @@ def list_task():
     tasks = manager.list_tasks()
     return json.dumps(tasks)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6957085c171ed79c6d4bd3908726950e15de2149
 @app.route('/result/<task_id>', methods=['GET'])
 def get_result(task_id):
     data_pro = request.get_json()
@@ -101,7 +124,13 @@ def remove_task(task_id):
             'status' : 'deleted'
         }
     else:
+<<<<<<< HEAD
         data_pro = {
             'task_id': 'не найдено'
         }
     return json.dumps(data_pro)
+=======
+        data_pro ={
+            'task_id': 'не найдено'
+        }
+>>>>>>> 6957085c171ed79c6d4bd3908726950e15de2149
